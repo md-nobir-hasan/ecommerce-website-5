@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a href="{{ route('home') }}" class="nav-link {{ Request::is('home') ? 'active' : '' }}">
+    <a href="{{ route('admin') }}" class="nav-link {{ Request::is('home') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
         <p>Home</p>
     </a>
@@ -16,13 +16,15 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="{{ route('category.index') }}" class="nav-link {{ Request::is('category/index') ? 'active' : '' }}">
+            <a href="{{ route('category.index') }}"
+                class="nav-link {{ Request::is('category/index') ? 'active' : '' }}">
                 <i class="nav-icon far fa-circle"></i>
                 <p>Show Category</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('category.create') }}" class="nav-link {{ Request::is('category/create') ? 'active' : '' }}">
+            <a href="{{ route('category.create') }}"
+                class="nav-link {{ Request::is('category/create') ? 'active' : '' }}">
                 <i class="nav-icon far fa-circle"></i>
                 <p>Add Category</p>
             </a>
@@ -41,13 +43,15 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="{{ route('shipping.index') }}" class="nav-link {{ Request::is('shipping/index') ? 'active' : '' }}">
+            <a href="{{ route('shipping.index') }}"
+                class="nav-link {{ Request::is('shipping/index') ? 'active' : '' }}">
                 <i class="nav-icon far fa-circle"></i>
                 <p>Show Shipping</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('shipping.create') }}" class="nav-link {{ Request::is('shipping/create') ? 'active' : '' }}">
+            <a href="{{ route('shipping.create') }}"
+                class="nav-link {{ Request::is('shipping/create') ? 'active' : '' }}">
                 <i class="nav-icon far fa-circle"></i>
                 <p>Add Shipping</p>
             </a>
@@ -91,13 +95,15 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="{{ route('product.index') }}" class="nav-link {{ Request::is('product/index') ? 'active' : '' }}">
+            <a href="{{ route('product.index') }}"
+                class="nav-link {{ Request::is('product/index') ? 'active' : '' }}">
                 <i class="nav-icon far fa-circle"></i>
                 <p>Show Product</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('product.create') }}" class="nav-link {{ Request::is('product/create') ? 'active' : '' }}">
+            <a href="{{ route('product.create') }}"
+                class="nav-link {{ Request::is('product/create') ? 'active' : '' }}">
                 <i class="nav-icon far fa-circle"></i>
                 <p>Add Product</p>
             </a>
