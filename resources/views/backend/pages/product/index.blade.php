@@ -19,7 +19,9 @@
                             <h4>View Product</h4>
                         </span>
                         <span class="float-right">
-                            <a href="{{ route('product.create') }}" class="btn btn-info">Add new Product</a>
+                            @if (Auth::user()->roll == 'super_admin')
+                                <a href="{{ route('product.create') }}" class="btn btn-info">Add new Product</a>
+                            @endif
                         </span>
                     </div>
                     <div class="card-body">

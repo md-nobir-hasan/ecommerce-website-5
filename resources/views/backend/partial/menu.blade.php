@@ -101,13 +101,15 @@
                 <p>Show Product</p>
             </a>
         </li>
-        <li class="nav-item">
-            <a href="{{ route('product.create') }}"
-                class="nav-link {{ Request::is('product/create') ? 'active' : '' }}">
-                <i class="nav-icon far fa-circle"></i>
-                <p>Add Product</p>
-            </a>
-        </li>
+        @if (Auth::user()->roll == 'super_admin')
+            <li class="nav-item">
+                <a href="{{ route('product.create') }}"
+                    class="nav-link {{ Request::is('product/create') ? 'active' : '' }}">
+                    <i class="nav-icon far fa-circle"></i>
+                    <p>Add Product</p>
+                </a>
+            </li>
+        @endif
     </ul>
 </li>
 

@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\PostCategory;
 use App\Models\Brand;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -31,6 +31,10 @@ class ProductController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->roll != 'super_admin'){
+            return redirect()->route('home');
+        }
+        // dd(Auth::user()->roll);
         $n['brands']=Brand::get();
         $n['category']=Category::all();
         // $n['post_category']=PostCategory::all();
