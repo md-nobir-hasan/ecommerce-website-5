@@ -47,7 +47,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->title }}</td>
-                                            <td>{{ $value->cat_info['title'] }}</td>
+                                            <td>{{ $value->cat_info->title }}</td>
                                             <td>TK. {{ $value->price }} /-</td>
                                             <td> {{ $value->discount }}% OFF</td>
                                             <td>{{ $value->condition }}</td>
