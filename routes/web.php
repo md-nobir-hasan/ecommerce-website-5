@@ -74,7 +74,7 @@ Route::group(['as' => 'product.', 'prefix' => 'product'], function() {
     Route::get('/delete/{id}',[ProductController::class,'destroy'])->name('destroy');
 });
 
-//PRODUCT MANAGEMENT
+//Order Management
 Route::group(['as' => 'order.', 'prefix' => 'order'], function() {
     Route::get('/index',[OrderController::class,'index'])->name('index');
     Route::get('/create',[OrderController::class,'create'])->name('create');

@@ -23,8 +23,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders=Order::orderBy('id','DESC')->paginate(10);
-        return view('backend.order.index')->with('orders',$orders);
+        $orders=Order::with(['shipping'])->orderBy('id','DESC')->paginate(10);
+        return view('backend.pages.order.index')->with('orders',$orders);
     }
 
     /**
@@ -74,9 +74,15 @@ class OrderController extends Controller
         $insert->payment_number = $request->payment_number;
         // = $request->payment_number;
         $insert->order_number ='ORD-'.strtoupper(Str::random(10));
-        $insert->email = $request->payment_number;
-        $insert->sub_total = $request->product_price;
-        $insert->total_amount = $request->product_price*$request->quantity;
+        $insert->email = $request->email;
+        $shipping_price = Shipping::find($request->shipping_id);
+
+        // calculation
+        $subtotal =$request->product_price*$request->quantity;
+        $total = $subtotal + $shipping_price->price;
+        $insert->total_amount = $total;
+        $insert->sub_total = $subtotal;
+
         $insert->country = $request->payment_number;
         $insert->last_name = $request->payment_number;
         $insert->save();

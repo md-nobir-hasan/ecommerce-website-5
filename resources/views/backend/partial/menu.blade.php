@@ -110,3 +110,23 @@
         </li>
     </ul>
 </li>
+
+
+{{-- Order Management  --}}
+<li class="nav-item {{ Request::is('order/*') ? 'menu-open' : '' }}">
+    <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-users"></i>
+        <p>
+            Order
+            <i class="fas fa-angle-left right"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ route('order.index') }}" class="nav-link {{ Request::is('order/index') ? 'active' : '' }}">
+                <i class="nav-icon far fa-circle"></i>
+                <p>Show Order</p>
+            </a>
+        </li>
+    </ul>
+</li>
