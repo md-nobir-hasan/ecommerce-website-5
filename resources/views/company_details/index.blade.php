@@ -215,7 +215,7 @@
                 </div>
             </div>
         </form>
-        <a href="https://twitter.com/prathkum">MADE BY Nobir</a>
+        {{-- <a href="#">MADE BY Nobir</a> --}}
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"

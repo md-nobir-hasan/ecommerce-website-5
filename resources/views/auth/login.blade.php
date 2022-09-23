@@ -58,6 +58,7 @@
         font-size: 1.8rem;
         color: #1DA1F2;
         letter-spacing: 1px;
+        text-align: center;
     }
 
     .inputs {
@@ -138,12 +139,8 @@
 
     <div class="container">
         {{-- <div class="brand-logo"></div> --}}
-        <div class="company-details">
-            <h1>Company Details</h1>
-        </div>
-        <div class="step-div">
-            <span id="step-1" class="step">1</span>
-            <span id="step-2" class="step">2</span>
+        <div class="company-details text-center">
+            <h1>Login</h1>
         </div>
 
         @if ($errors->any())
@@ -157,13 +154,13 @@
         <form action="{{ route('login') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="inputs tab" id="tab-1">
-                <h3>Login</h3>
+
                 <label>E-Mail
-                    <input type="text" name="email" value="{{ old('email') }}" placeholder="Inter your email" />
+                    <input type="email" name="email" value="{{ old('email') }}" placeholder="Inter your email" />
                 </label>
 
                 <label>Password
-                    <input type="text" name="password" value="{{ old('password') }}" />
+                    <input type="password" name="password" value="{{ old('password') }}" />
                 </label>
                 <!-- Session Status -->
                 <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -178,7 +175,7 @@
                 </div>
             </div>
         </form>
-        <a href="#">MADE BY Nobir</a>
+        {{-- <a href="#">MADE BY Nobir</a> --}}
     </div>
 
 </body>
