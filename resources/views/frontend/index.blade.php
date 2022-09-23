@@ -221,7 +221,7 @@
         </section>
 
         {{-- Why this product  --}}
-        @if ($product != null)
+        @if ($product->summary != null)
             <section class="why-us">
 
                 <div class="row text-center shadow-lg p-3 mb-5 bg-body rounded justify-content-md-center">
