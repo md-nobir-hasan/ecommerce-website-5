@@ -54,6 +54,7 @@
 
     .company-details {
         margin-top: 10px;
+        margin-bottom: 20px;
         font-weight: 900;
         font-size: 1.8rem;
         color: #1DA1F2;
