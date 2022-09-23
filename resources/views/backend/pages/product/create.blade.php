@@ -3,7 +3,7 @@
 @section('title', 'Product Management')
 
 @push('third_party_stylesheets')
-    <link rel="stylesheet" href="{{ asset('backend/summernote/summernote.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/backend/library/summernote/summernote.min.css') }}">
 @endpush
 
 @push('page_css')
@@ -154,9 +154,25 @@
 
 @push('third_party_scripts')
     <script src="{{ asset('assets/js/DataTable/datatables.min.js') }}"></script>
-    <script src="{{ asset('backend/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('assets/backend/library/summernote/summernote.min.js') }}"></script>
 @endpush
 
 @push('page_scripts')
-    <script></script>
+    <script>
+        $(document).ready(function() {
+            $('#summary').summernote({
+                placeholder: "Write short description.....",
+                tabsize: 2,
+                height: 100
+            });
+        });
+
+        $(document).ready(function() {
+            $('#description').summernote({
+                placeholder: "Write detail description.....",
+                tabsize: 2,
+                height: 150
+            });
+        });
+    </script>
 @endpush
