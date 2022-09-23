@@ -111,6 +111,7 @@
                                     {{-- <label> Product Name <span class="text-danger"> {{ $data->title }}</span> --}}
                                     <input type="hidden" name="product_title" value="{{ $product->title }}">
                                     <input type="hidden" name="product_price" value="{{ $product->price }}">
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
 
                                     </label>
                                 </div>

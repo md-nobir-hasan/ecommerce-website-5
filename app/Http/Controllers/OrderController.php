@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Shipping;
+use App\Models\Product;
 use App\User;
 use PDF;
 use Notification;
@@ -86,6 +87,11 @@ class OrderController extends Controller
         $insert->country = $request->payment_number;
         $insert->last_name = $request->payment_number;
         $insert->save();
+
+        $product_update = Product::find($request->product_id);
+        $product_update->stock = $product_update->stock - $request->quantity;
+        $product_update->save();
+        // dd($product_update->stock);
         // $order_data=$request->all();
         // $order_data['order_number']='ORD-'.strtoupper(Str::random(10));
         // // $order_data['user_id']=$request->user()->id;
