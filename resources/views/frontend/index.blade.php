@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $company_info->title }}</title>
-    <link rel="icon" type="image/png" href="{{ url('public/product/' . $company_info->logo) }}" />
+    <link rel="icon" type="image/png" href="{{ asset($company_info->logo) }}" />
     {{-- online css link --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -20,8 +20,7 @@
         <div class="col-md-8">
             <a class="navbar-brand" href="#">
                 {{-- logo --}}
-                <img class="rounded-pill" src="{{ url('public/product/' . $company_info->logo) }}" alt="Image_logo"
-                    style="width: 60px">
+                <img class="rounded-pill" src="{{ asset($company_info->logo) }}" alt="Image_logo" style="width: 60px">
                 {{-- Copany Name --}}
                 <span style="font-size: 22px">{{ $company_info->name }}</span>
             </a>
@@ -78,36 +77,40 @@
         {{-- product section --}}
         <section class="products" id="products">
             <h1 class="heading"><span>products</span> </h1>
+            @if ($product == null)
+                <p style="text-align: center">no products</p>
+            @endif
             <div class="box-container">
-                @foreach ($product as $data)
+
+                @if ($product != null)
                     <div class="box">
-                        <span class="discount">-{{ $data->discount }}৳</span>
+                        <span class="discount">-{{ $product->discount }}৳</span>
                         <div class="image">
-                            <img class="img-fluid rounded-4 shadow-2-strong" src="{{ asset('product/' . $data->photo) }}"
-                                alt="Product Image">
+                            <img class="img-fluid rounded-4 shadow-2-strong"
+                                src="{{ asset('product/' . $product->photo) }}" alt="Product Image">
                             <div class="icons">
                                 <a href="#" class="fas fa-thumbs-up"></a>
                                 <a href="#" class="cart-btn" data-bs-toggle="collapse"
-                                    data-bs-target="#product-{{ $data->id }}" aria-expanded="false"
-                                    aria-controls="product-{{ $data->id }}">Buy Now</a>
+                                    data-bs-target="#product-{{ $product->id }}" aria-expanded="false"
+                                    aria-controls="product-{{ $product->id }}">Buy Now</a>
                                 <a href="#" class="fas fa-thumbs-up"></a>
                             </div>
                         </div>
                         <div class="content">
-                            <h3>{{ $data->title }}</h3>
-                            <div class="price"> {{ $data->price }}৳ <span>{{ $data->discount }}৳</span> </div>
+                            <h3>{{ $product->title }}</h3>
+                            <div class="price"> {{ $product->price }}৳ <span>{{ $product->discount }}৳</span> </div>
                         </div>
                     </div>
 
                     {{-- Order form --}}
-                    <div class="collapse" id="product-{{ $data->id }}">
+                    <div class="collapse" id="product-{{ $product->id }}">
                         <div class="card card-body">
                             <form action="{{ route('order.store') }}" method="POST" class="row g-3 needs-validation">
                                 @csrf
                                 <div class="col-12 text-center">
                                     {{-- <label> Product Name <span class="text-danger"> {{ $data->title }}</span> --}}
-                                    <input type="hidden" name="product_title" value="{{ $data->title }}">
-                                    <input type="hidden" name="product_price" value="{{ $data->price }}">
+                                    <input type="hidden" name="product_title" value="{{ $product->title }}">
+                                    <input type="hidden" name="product_price" value="{{ $product->price }}">
 
                                     </label>
                                 </div>
@@ -212,7 +215,7 @@
                             </form>
                         </div>
                     </div>
-                @endforeach
+                @endif
             </div>
         </section>
         <section class="why-us">

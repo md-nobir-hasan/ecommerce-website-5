@@ -62,8 +62,8 @@ class CompanyDetailsController extends Controller
         if($request->file('logo')){
             $file= $request->file('logo');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('public/product'), $filename);
-           $insert->logo= $filename;
+            $file-> move(public_path('company_details'), $filename);
+           $insert->logo= 'company_details/'.$filename;
         }
         // $insert->logo = $request->logo;
         $insert->address = $request->address;

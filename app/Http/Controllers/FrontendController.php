@@ -25,7 +25,8 @@ class FrontendController extends Controller
             $n['company_info'] = CompanyInfo::first();
             $n['company_contact_info'] = CompanyContact::first();
             $n['shipping'] = Shipping::all();
-            $n['product'] = Product::all();
+            $n['product'] = Product::first();
+            // dd($n['product']);
             return view('frontend.index',$n);
 
     }
