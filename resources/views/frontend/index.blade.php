@@ -197,7 +197,8 @@
                                 $discount = ($product->discount * $product->price) / 100;
                             @endphp
                             <div class="price"> {{ round($product->price - $discount) }}৳
-                                <span>{{ round($product->price) }}৳</span> </div>
+                                <span>{{ round($product->price) }}৳</span>
+                            </div>
                         </div>
                     </div>
 
@@ -327,7 +328,7 @@
                     <h1 style="font-weight: bolder; text-align: center;margin-bottom: 20px; color: #e82a86">কেন গ্যাস
                         সেইফটি ডিভাইস ব্যবহার করবেন? </h1>
                     {{-- align-self-center --}}
-                    <div class="col-md-8 text-center">
+                    <div class="col-md-8">
 
                         {!! $product->summary !!}
                     </div>
