@@ -12,6 +12,11 @@
     {{-- custom css link --}}
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('css/css/style1.css') }}"> --}}
+    <style>
+        body {
+            font-size: 17px;
+        }
+    </style>
 </head>
 
 <body>
@@ -26,43 +31,13 @@
             </a>
         </div>
     </div>
-    {{-- <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img class="rounded-pill" src="{{ url('public/product/' . $company_info->logo) }}" alt=""
-                    style="width: 60px">
-                <span style="font-size: 22px">{{ $company_info->name }}</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
-                <ul class="navbar-nav navbar-right ml-lg-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav> --}}
-    {{-- {{ url('public/product/' . $company_info->logo) }} --}}
-    <!-- End Navbar  -->
 
     {{-- Body content --}}
     <div class="container-fluid">
         {{-- Paragrap div --}}
-        <div class="row m-4 justify-content-md-center ">
+        <div class="row mt-5 justify-content-md-center header-text">
             <div class="col-md-8 text-wrap text-center">
-                <p class="text-wrap">🔰শৈশবের ডায়েরী / আমার স্মৃতিময় শৈশব। 😊
-                    অনেকেই ডায়েরী ২ টার খোঁজ করেছেন কিন্তু পাননি। 🧐🧐 তাইতো
-                    ডায়েরী নিজেই আপনাদের খোঁজ করার জন্য তাইতাই ডটকমের কাছে হাজির হয়েছে। 😎😎
-                    খুঁজে না পাওয়া এমন অনেক বাচ্চাদের পণ্য পেতে আমাদের সাথেই থাকুন।🥰
-                    বিস্তারিত জানতে নিচের ভিডিও টি সম্পূর্ণ দেখুন।</p>
+                <p class="text-wrap">আপনার একটু অসতর্কতা পরিণত হতে পারে সারাজীবনের কান্নায়।</p>
             </div>
         </div>
 
@@ -74,38 +49,163 @@
                 allowfullscreen></iframe>
         </div>
 
+        {{-- Paragrap div --}}
+        <div class="row mt-5 justify-content-md-center video-footer-text">
+            <div class="col-md-8 text-wrap text-center">
+                <p class="text-wrap">গ্যাসের আগুনে প্রতিবছর কেড়ে নেয় হাজারো প্রান। গ্যাসের আগুন এবং সিলিন্ডার বিস্ফোরণ
+                    থেকে আপনার পরিবারকে সুরক্ষা দিতে ব্যবহার করুন গ্যাস সেইফটি ডিভাইস। </p>
+            </div>
+            @if (isset($product))
+                <a href="#" class="cart-btn text-center" data-bs-toggle="collapse" data-bs-target="#product-top"
+                    aria-expanded="false" aria-controls="product- {{ $product->id }}">অর্ডার করুন</a>
+                </a>
+            @endif
+            <div class="collapse" id="product-top">
+                <div class="card card-body">
+                    <form action="{{ route('order.store') }}" method="POST" class="row g-3 needs-validation">
+                        @csrf
+                        <div class="col-12 text-center">
+                            @if (isset($product))
+                                <input type="hidden" name="product_title" value="{{ $product->title }}">
+                                <input type="hidden" name="product_price" value="{{ $product->price }}">
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            @endif
+                        </div>
+                        <div class="col-md-4">
+                            <label for="name" class="form-label">নাম <span style="color: red;">*</span></label>
+                            <input name="first_name" type="text" class="form-control" id="name"
+                                placeholder="Enter your name" required>
+                            @if ($errors->has('first_name'))
+                                <span class="text-danger">{{ $errors->first('first_name') }}</span>
+                            @endif
+                        </div>
+                        <div class="col-md-4">
+                            <label for="address1" class="form-label" placeholder="Enter your Address">ঠিকানা
+                                <span style="color: red;">*</span></label>
+                            <textarea name="address1" id="address1" class="form-control" aria-label="With textarea" required></textarea>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="phone" class="form-label">ফোন নাম্বার
+                                <span style="color: red;">*</span>
+                            </label>
+                            <input type="tel" name="phone" class="form-control" id="phone"
+                                aria-describedby="inputGroupPrepend" required placeholder="Enter your phone number">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="address" class="form-label">ই-মেইল</label>
+                            <input type="email" name="email" id="email" class="form-control"
+                                placeholder="Enter your address">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="quantity" class="form-label">পরিমাণ</label>
+                            <input type="number" name="quantity" value="1" id="quantity" class="form-control"
+                                required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="address" class="form-label">শিপিং</label>
+                            <select name="shipping_id" id="" class="form-control select" required>
+                                <option value="" hidden>Select Shipping Method</option>
+                                @if (isset($shipping))
+                                    @foreach ($shipping as $n)
+                                        <option value="{{ $n->id }}">{{ $n->type }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+
+                        <label>শিপিং প্রক্রিয়া:</label>
+                        <div class="form-check">
+                            <input class="pamyment_method form-check-input" type="radio" name="pamyment_methods"
+                                id="flexRadioDefault1" value="Bkash" autocomplete="off">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Bkash
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="pamyment_method form-check-input" type="radio" name="pamyment_methods"
+                                id="flexRadioDefault2"value="Nagad" autocomplete="off">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Nagad
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="pamyment_method form-check-input" type="radio" name="pamyment_methods"
+                                id="checkbox3" value="CashonDelivery" autocomplete="off">
+                            <label class="form-check-label" for="checkbox3">
+                                Cash On
+                                Delivary
+                            </label>
+                        </div>
+
+                        <div class="row text-center">
+                            <div class="col-md-4" id="bkash" style="display:none">
+                                <label>আপনার বিকাশ নাম্বারঃ
+                                    <input type="number" name="payment_number" id="bkash_input"
+                                        class="form-control" placeholder="যে নাম্বার থেকে টাকা পাঠিয়েছেন" required>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-4" id="nagad" style="display:none">
+                                <label>আপনার নগদ নাম্বারঃ
+                                    <input type="number" name="payment_number" id="nagad_input"
+                                        class="form-control" placeholder="যে নাম্বার থেকে টাকা পাঠিয়েছেন" required>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 text-center">
+                            <button class="btn btn-primary">ওর্ডার নিশ্চিত করুন</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         {{-- product section --}}
         <section class="products" id="products">
-            <h1 class="heading"><span>products</span> </h1>
+            <h1 class="heading"><span>পণ্য</span> </h1>
             @if ($product == null)
-                <p style="text-align: center">no products</p>
+                <p style="text-align: center">কোনো পণ্য যোগ করা হইনি</p>
             @endif
             <div class="box-container">
 
                 @if ($product != null)
                     <div class="box">
-                        <span class="discount">-{{ $product->discount }}৳</span>
+                        @php
+                            $discount = ($product->discount * $product->price) / 100;
+                        @endphp
+                        <span class="discount">-{{ round($discount) }}৳</span>
                         <div class="image">
                             <img class="img-fluid rounded-4 shadow-2-strong"
                                 src="{{ asset('product/' . $product->photo) }}" alt="Product Image">
                             <div class="icons">
-                                <a href="#" class="fas fa-thumbs-up"></a>
+                                <a href="javascript:void(0)" class="fas fa-thumbs-up"></a>
                                 <a href="#" class="cart-btn" data-bs-toggle="collapse"
                                     data-bs-target="#product-{{ $product->id }}" aria-expanded="false"
-                                    aria-controls="product-{{ $product->id }}">Buy Now</a>
-                                <a href="#" class="fas fa-thumbs-up"></a>
+                                    aria-controls="product-{{ $product->id }}">ওর্ডার করুন</a>
+                                <a href="javascript:void(0)" class="fas fa-thumbs-up"></a>
                             </div>
                         </div>
                         <div class="content">
                             <h3>{{ $product->title }}</h3>
-                            <div class="price"> {{ $product->price }}৳ <span>{{ $product->discount }}৳</span> </div>
+                            @php
+                                $discount = ($product->discount * $product->price) / 100;
+                            @endphp
+                            <div class="price"> {{ round($product->price - $discount) }}৳
+                                <span>{{ round($product->price) }}৳</span> </div>
                         </div>
                     </div>
 
                     {{-- Order form --}}
                     <div class="collapse" id="product-{{ $product->id }}">
                         <div class="card card-body">
-                            <form action="{{ route('order.store') }}" method="POST" class="row g-3 needs-validation">
+                            <form action="{{ route('order.store') }}" method="POST"
+                                class="row g-3 needs-validation">
                                 @csrf
                                 <div class="col-12 text-center">
                                     {{-- <label> Product Name <span class="text-danger"> {{ $data->title }}</span> --}}
@@ -116,7 +216,7 @@
                                     </label>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="name" class="form-label">Name <span
+                                    <label for="name" class="form-label">নাম <span
                                             style="color: red;">*</span></label>
                                     <input name="first_name" type="text" class="form-control" id="name"
                                         placeholder="Enter your name" required>
@@ -125,13 +225,15 @@
                                     @endif
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="address1" class="form-label" placeholder="Enter your Address">Address
+                                    <label for="address1" class="form-label"
+                                        placeholder="Enter your Address">সম্পূর্ণ
+                                        ঠিকানা
                                         <span style="color: red;">*</span></label>
                                     <textarea name="address1" id="address1" class="form-control" aria-label="With textarea" required></textarea>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="phone" class="form-label">Phone Number
+                                    <label for="phone" class="form-label">ফোন নাম্বার
                                         <span style="color: red;">*</span>
                                     </label>
                                     <input type="tel" name="phone" class="form-control" id="phone"
@@ -140,27 +242,27 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="address" class="form-label">Email(optional)</label>
+                                    <label for="address" class="form-label">ই-মেইল(যদি থাকে)</label>
                                     <input type="email" name="email" id="email" class="form-control"
                                         placeholder="Enter your address">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="quantity" class="form-label">Quantity</label>
+                                    <label for="quantity" class="form-label">পরিমাণ</label>
                                     <input type="number" name="quantity" value="1" id="quantity"
                                         class="form-control" required>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="address" class="form-label">Shipping</label>
+                                    <label for="address" class="form-label">শিপিং</label>
                                     <select name="shipping_id" id="" class="form-control select" required>
-                                        <option value="">Select Shipping Method</option>
+                                        <option value="" hidden>Select Shipping Method</option>
                                         @foreach ($shipping as $n)
                                             <option value="{{ $n->id }}">{{ $n->type }}</option>
                                         @endforeach
                                     </select>
                                 </div>
 
-                                <label>Payment method:</label>
+                                <label>পেমেন্ট প্রক্রিয়া:</label>
                                 <div class="form-check">
                                     <input class="pamyment_method form-check-input" type="radio"
                                         name="pamyment_methods" id="flexRadioDefault1" value="Bkash"
@@ -188,7 +290,6 @@
                                     </label>
                                 </div>
 
-
                                 <div class="row text-center">
                                     <div class="col-md-4" id="bkash" style="display:none">
                                         <label>আপনার বিকাশ নাম্বারঃ
@@ -208,10 +309,8 @@
                                     </div>
                                 </div>
 
-
-
                                 <div class="col-12 text-center">
-                                    <button class="btn btn-primary">Confirm Order</button>
+                                    <button class="btn btn-primary">ওর্ডার নিশিত করুন</button>
                                 </div>
                             </form>
                         </div>
@@ -221,31 +320,16 @@
         </section>
 
         {{-- Why this product  --}}
-        @if ($product->summary != null)
+        @if (isset($product->summary))
             <section class="why-us">
 
                 <div class="row text-center shadow-lg p-3 mb-5 bg-body rounded justify-content-md-center">
-                    <h1 style="font-weight: bolder; text-align: center">Why This Product</h1>
+                    <h1 style="font-weight: bolder; text-align: center;margin-bottom: 20px; color: #e82a86">কেন গ্যাস
+                        সেইফটি ডিভাইস ব্যবহার করবেন? </h1>
                     {{-- align-self-center --}}
-                    <div class="col-md-8 text-center ">
+                    <div class="col-md-8 text-center">
 
                         {!! $product->summary !!}
-
-                        {{-- Delete as soon as possible  --}}
-                        {{-- <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Quisquam quasi labore sint, voluptatem quae itaque!</p>
-                        <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Quisquam quasi labore sint, voluptatem quae itaque!</p>
-                        <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Quisquam quasi labore sint, voluptatem quae itaque!</p>
-                        <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Quisquam quasi labore sint, voluptatem quae itaque!</p>
-                        <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Quisquam quasi labore sint, voluptatem quae itaque!</p>
-                        <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Quisquam quasi labore sint, voluptatem quae itaque!</p>
-                        <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Quisquam quasi labore sint, voluptatem quae itaque!</p> --}}
                     </div>
                 </div>
             </section>
@@ -253,39 +337,17 @@
 
         {{-- review sectio --}}
         <section>
-            <div class="row text-center shadow-lg p-3 mb-5 bg-body rounded ">
-                {{-- <h1>Customer Review</h1> --}}
-                {{-- @foreach ($posts as $n)
+            {{-- <div class="row text-center shadow-lg p-3 mb-5 bg-body rounded "> --}}
+            {{-- <h1>Customer Review</h1> --}}
+            {{-- @foreach ($posts as $n)
                     <div class="col-md-6 about">
                         <img src="{{ url($n->photo) }}" alt="" width="100px">
                     </div>
                 @endforeach --}}
-            </div>
-        </section>
-        {{-- review sectio end --}}
+            {{-- </div> --}}
+            {{-- </section> --}}
+            {{-- review sectio end --}}
     </div>
-
-
-    {{-- End Body content --}}
-    {{-- <div class="info-details">
-        <div class="custom-info">
-            <p style="text-align: center;">
-                <strong>ডেলিভারি চার্জ</strong> <br>
-                ঢাকার ভিতরঃ ৬০ টাকা<br>
-                ঢাকার বাহিরেঃ ১০০ টাকা
-            </p>
-
-        </div>
-
-        <div>
-            <p style="text-align: justify;">
-                উভয় ডায়েরীতে সন্তানের জন্ম থেকে শুরু করে একটা নির্দিষ্ট বয়স পর্যন্ত প্রতিটা ধাপে ধাপে তার বেড়ে
-                ওঠা,যেকোনো মুহূর্তের স্মৃতিময় ছবি,পরিবারের পরিচিতি সবকিছুই একই ডাইরিতে সংরক্ষণ করতে পারবেন। আজকাল
-                মোবাইল ফোনের কারণে আমাদের কোনো কিছুই আর আলাদাভাবে সংরক্ষণ করা হয় না । তবে এই ডায়েরিটি আপনার
-                সন্তানের সকল সুখ স্মৃতি গুলোকে খুব সুন্দর এবং সাবলীলভাবে সংরক্ষিত অবস্থায় রাখবে।
-            </p>
-        </div>
-    </div> --}}
 
     <div>
         <div class="row justify-content-center social-icon">

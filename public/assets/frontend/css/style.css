@@ -276,7 +276,6 @@ header .fa-bars {
     /* left: 0;
     right: 0; */
     display: flex;
-  
 }
 
 .products .box-container .box:hover .image .icons {
@@ -616,8 +615,9 @@ hr {
 .footer {
     background-color: black;
     color: white;
-    height: 50px;
+    /* height: 50px; */
     justify-items: center;
+    padding: 16px 8px 16px 8px;
 }
 .footer p {
     text-align: center;
@@ -886,4 +886,13 @@ input[type="submit"] {
 .why-us p {
     font-size: 15px;
     margin: 0px 0px 15px 0px;
+}
+
+/* 24-09-022 */
+.header-text {
+    margin-top: 105px !important;
+    font-size: 18px;
+}
+.video-footer-text {
+    font-size: 18px;
 }

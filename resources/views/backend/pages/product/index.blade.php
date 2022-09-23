@@ -19,7 +19,7 @@
                             <h4>View Product</h4>
                         </span>
                         <span class="float-right">
-                            @if (Auth::user()->roll == 'super_admin')
+                            @if (count($products) < 1)
                                 <a href="{{ route('product.create') }}" class="btn btn-info">Add new Product</a>
                             @endif
                         </span>

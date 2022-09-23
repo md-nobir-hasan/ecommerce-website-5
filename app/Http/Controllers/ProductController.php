@@ -31,7 +31,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->roll != 'super_admin'){
+        $product = Product::all();
+        if(count($product)>1){
             return redirect()->route('home');
         }
         // dd(Auth::user()->roll);
@@ -153,7 +154,6 @@ class ProductController extends Controller
             'title'=>'string|required',
             'summary'=>'string|required',
             'description'=>'string|nullable',
-            'photo'=>'required',
             'size'=>'nullable',
             'stock'=>"required|numeric",
             'cat_id'=>'required|exists:categories,id',
