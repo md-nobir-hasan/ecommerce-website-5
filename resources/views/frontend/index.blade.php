@@ -218,32 +218,42 @@
                 @endif
             </div>
         </section>
-        <section class="why-us">
-            <div class="row text-center shadow-lg p-3 mb-5 bg-body rounded justify-content-md-center">
-                {{-- align-self-center --}}
-                <div class="col-md-8 text-center ">
-                    <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Quisquam quasi labore sint, voluptatem quae itaque!</p>
-                    <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Quisquam quasi labore sint, voluptatem quae itaque!</p>
-                    <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Quisquam quasi labore sint, voluptatem quae itaque!</p>
-                    <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Quisquam quasi labore sint, voluptatem quae itaque!</p>
-                    <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Quisquam quasi labore sint, voluptatem quae itaque!</p>
-                    <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Quisquam quasi labore sint, voluptatem quae itaque!</p>
-                    <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Quisquam quasi labore sint, voluptatem quae itaque!</p>
+
+        {{-- Why this product  --}}
+        @if ($product != null)
+            <section class="why-us">
+
+                <div class="row text-center shadow-lg p-3 mb-5 bg-body rounded justify-content-md-center">
+                    <h1 style="font-weight: bolder; text-align: center">Why This Product</h1>
+                    {{-- align-self-center --}}
+                    <div class="col-md-8 text-center ">
+
+                        {!! $product->summary !!}
+
+                        {{-- Delete as soon as possible  --}}
+                        {{-- <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Quisquam quasi labore sint, voluptatem quae itaque!</p>
+                        <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Quisquam quasi labore sint, voluptatem quae itaque!</p>
+                        <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Quisquam quasi labore sint, voluptatem quae itaque!</p>
+                        <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Quisquam quasi labore sint, voluptatem quae itaque!</p>
+                        <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Quisquam quasi labore sint, voluptatem quae itaque!</p>
+                        <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Quisquam quasi labore sint, voluptatem quae itaque!</p>
+                        <p><i class="fas fa-check-double"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Quisquam quasi labore sint, voluptatem quae itaque!</p> --}}
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
 
         {{-- review sectio --}}
         <section>
             <div class="row text-center shadow-lg p-3 mb-5 bg-body rounded ">
-                <h1>Customer Review</h1>
+                {{-- <h1>Customer Review</h1> --}}
                 {{-- @foreach ($posts as $n)
                     <div class="col-md-6 about">
                         <img src="{{ url($n->photo) }}" alt="" width="100px">
@@ -256,7 +266,7 @@
 
 
     {{-- End Body content --}}
-    <div class="info-details">
+    {{-- <div class="info-details">
         <div class="custom-info">
             <p style="text-align: center;">
                 <strong>ডেলিভারি চার্জ</strong> <br>
@@ -274,7 +284,7 @@
                 সন্তানের সকল সুখ স্মৃতি গুলোকে খুব সুন্দর এবং সাবলীলভাবে সংরক্ষিত অবস্থায় রাখবে।
             </p>
         </div>
-    </div>
+    </div> --}}
 
     <div>
         <div class="row justify-content-center social-icon">

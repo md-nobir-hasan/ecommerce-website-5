@@ -3,6 +3,7 @@
 @section('title', 'Product Management')
 
 @push('third_party_stylesheets')
+    <link rel="stylesheet" href="{{ asset('assets/backend/library/summernote/summernote.min.css') }}">
 @endpush
 
 @push('page_css')
@@ -24,7 +25,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-10 m-auto">
-                                <form method="post" action="{{ route('product.update',$product->id) }}" enctype="multipart/form-data">
+                                <form method="post" action="{{ route('product.update', $product->id) }}"
+                                    enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     @method('PUT')
                                     <div class="form-group">
@@ -40,7 +42,7 @@
                                     <div class="form-group">
                                         <label for="summary" class="col-form-label">Why this product <span
                                                 class="text-danger">*</span></label>
-                                        <textarea class="form-control" id="summary" name="summary">{{ $product->summary }}</textarea>
+                                        <textarea class="form-control" id="summary" name="summary">{!! $product->summary !!}</textarea>
                                         @error('summary')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -48,7 +50,7 @@
 
                                     <div class="form-group">
                                         <label for="description" class="col-form-label">Description</label>
-                                        <textarea class="form-control" id="description" name="description">{{ $product->summary }}</textarea>
+                                        <textarea class="form-control" id="description" name="description">{!! $product->description !!}</textarea>
                                         @error('description')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -126,7 +128,7 @@
                                         <label for="inputPhoto" class="col-form-label">Photo <span
                                                 class="text-danger">*</span></label>
                                         <input id="photo" type="file" name="photo"
-                                            placeholder="Enter Product Photo" value="{{ $product->price }}"
+                                            placeholder="Enter Product Photo" value="{{ $product->photo }}"
                                             class="form-control">
                                         <div id="holder" style="margin-top:15px;max-height:100px;"></div>
                                         @error('photo')
@@ -162,8 +164,25 @@
 
 @push('third_party_scripts')
     <script src="{{ asset('assets/js/DataTable/datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/backend/library/summernote/summernote.min.js') }}"></script>
 @endpush
 
 @push('page_scripts')
-    <script></script>
+    <script>
+        $(document).ready(function() {
+            $('#summary').summernote({
+                placeholder: "Write short description.....",
+                tabsize: 2,
+                height: 100
+            });
+        });
+
+        $(document).ready(function() {
+            $('#description').summernote({
+                placeholder: "Write detail description.....",
+                tabsize: 2,
+                height: 150
+            });
+        });
+    </script>
 @endpush
