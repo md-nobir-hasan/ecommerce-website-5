@@ -39,6 +39,16 @@
         .footer-text {
             color: #0BF729;
         }
+        .free-delivary {
+            display: inline-block;
+    border: 5px solid #eed282;
+    margin-bottom: 30px;
+    padding: 8px;
+    color: violet;
+        }
+        .fa-phone-alt{
+            color: #e82a86;
+        }
     </style>
 </head>
 
@@ -80,7 +90,7 @@
             </div>
             @if (isset($product))
                 <div class="row text-center ">
-                    <div class="col-md-3 text-center justify-self-center offset-md-5">
+                    <div class="col-md-3 text-center justify-self-center offset-md-4">
                         <a href="#" class="btn cart-btn text-center order-text" data-bs-toggle="collapse"
                             data-bs-target="#product-top" aria-expanded="false"
                             aria-controls="product- {{ $product->id }}">অর্ডার করুন</a>
@@ -132,7 +142,7 @@
                                 class="form-control" required>
                         </div>
 
-                        <div class="col-md-4">
+                        {{-- <div class="col-md-4">
                             <label for="address" class="form-label">শিপিং</label>
                             <select name="shipping_id" id="" class="form-control select" required>
                                 <option value="" hidden>Select Shipping Method</option>
@@ -142,9 +152,9 @@
                                     @endforeach
                                 @endif
                             </select>
-                        </div>
+                        </div> --}}
 
-                        <label>শিপিং প্রক্রিয়া:</label>
+                        <label>পেমেন্ট প্রক্রিয়া:</label>
                         <div class="form-check">
                             <input class="pamyment_method form-check-input" type="radio" name="pamyment_methods"
                                 id="flexRadioDefault1" value="Bkash" autocomplete="off">
@@ -225,7 +235,13 @@
                                 $discount = ($product->discount * $product->price) / 100;
                             @endphp
                             <div class="price"> {{ round($product->price - $discount) }}৳
-                                <span>{{ round($product->price) }}৳</span>
+                                {{-- <span>{{ round($product->price) }}৳</span> --}}
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-4 offset-md-4">
+                                <span class="free-delivary">অফার প্রাইস ১২৯৯ টাকা <br>
+                                    ডেলিভারি চার্জ ফ্রী</span>
                             </div>
                         </div>
                     </div>
@@ -283,13 +299,13 @@
 
                                 {{-- <div class="col-md-4"> --}}
                                 {{-- <label for="address" class="form-label">শিপিং</label> --}}
-                                <select name="shipping_id" id="" class="form-control select" hidden
+                                {{-- <select name="shipping_id" id="" class="form-control select" hidden
                                     required>
                                     <option value="" hidden>Select Shipping Method</option>
                                     @foreach ($shipping as $n)
                                         <option value="{{ $n->id }}">{{ $n->type }}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
                                 {{-- </div> --}}
 
                                 <label>পেমেন্ট প্রক্রিয়া:</label>
