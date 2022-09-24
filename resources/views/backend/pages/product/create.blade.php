@@ -65,7 +65,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="price" class="col-form-label">Price(NRS) <span
+                                        <label for="price" class="col-form-label">Price(TK) <span
                                                 class="text-danger">*</span></label>
                                         <input id="price" type="number" name="price" placeholder="Enter price"
                                             value="{{ old('price') }}" class="form-control">
