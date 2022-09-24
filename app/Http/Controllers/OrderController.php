@@ -70,7 +70,7 @@ class OrderController extends Controller
         $insert->address1 = $request->address1;
         $insert->phone = $request->phone;
         $insert->quantity = $request->quantity;
-        $insert->shipping_id = $request->shipping_id;
+        $insert->shipping_id = 1;
         $insert->pamyment_methods = $request->pamyment_methods;
         $insert->payment_number = $request->payment_number;
         // = $request->payment_number;

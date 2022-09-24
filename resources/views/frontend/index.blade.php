@@ -16,6 +16,29 @@
         body {
             font-size: 17px;
         }
+
+        .order-section {
+            background-color: rgba(207, 127, 127, 0.422);
+        }
+
+        .text-wrap-head {
+            background-color: rgba(64, 218, 13, 0.422);
+            font-weight: bold;
+            font-size: 23px;
+        }
+
+        .order-text {
+            background-color: #e84393;
+            color: black;
+        }
+
+        .fa-youtube {
+            color: red;
+        }
+
+        .footer-text {
+            color: #0BF729;
+        }
     </style>
 </head>
 
@@ -25,7 +48,7 @@
         <div class="col-md-8">
             <a class="navbar-brand" href="#">
                 {{-- logo --}}
-                <img class="rounded-pill" src="{{ asset($company_info->logo) }}" alt="Image_logo" style="width: 60px">
+                <img class="rounded-pill" src="{{ asset($company_info->logo) }}" alt="Image_logo" style="width: 80px">
                 {{-- Copany Name --}}
                 <span style="font-size: 22px">{{ $company_info->name }}</span>
             </a>
@@ -37,7 +60,7 @@
         {{-- Paragrap div --}}
         <div class="row mt-5 justify-content-md-center header-text">
             <div class="col-md-8 text-wrap text-center">
-                <p class="text-wrap">আপনার একটু অসতর্কতা পরিণত হতে পারে সারাজীবনের কান্নায়।</p>
+                <p class="text-wrap-head">আপনার একটু অসতর্কতা পরিণত হতে পারে সারাজীবনের কান্নায়।</p>
             </div>
         </div>
 
@@ -56,12 +79,17 @@
                     থেকে আপনার পরিবারকে সুরক্ষা দিতে ব্যবহার করুন গ্যাস সেইফটি ডিভাইস। </p>
             </div>
             @if (isset($product))
-                <a href="#" class="cart-btn text-center" data-bs-toggle="collapse" data-bs-target="#product-top"
-                    aria-expanded="false" aria-controls="product- {{ $product->id }}">অর্ডার করুন</a>
-                </a>
+                <div class="row text-center ">
+                    <div class="col-md-3 text-center justify-self-center offset-md-5">
+                        <a href="#" class="btn cart-btn text-center order-text" data-bs-toggle="collapse"
+                            data-bs-target="#product-top" aria-expanded="false"
+                            aria-controls="product- {{ $product->id }}">অর্ডার করুন</a>
+                        </a>
+                    </div>
+                </div>
             @endif
             <div class="collapse" id="product-top">
-                <div class="card card-body">
+                <div class="card card-body order-section">
                     <form action="{{ route('order.store') }}" method="POST" class="row g-3 needs-validation">
                         @csrf
                         <div class="col-12 text-center">
@@ -100,8 +128,8 @@
                         </div>
                         <div class="col-md-4">
                             <label for="quantity" class="form-label">পরিমাণ</label>
-                            <input type="number" name="quantity" value="1" id="quantity" class="form-control"
-                                required>
+                            <input type="number" name="quantity" value="1" id="quantity"
+                                class="form-control" required>
                         </div>
 
                         <div class="col-md-4">
@@ -184,11 +212,11 @@
                             <img class="img-fluid rounded-4 shadow-2-strong"
                                 src="{{ asset('product/' . $product->photo) }}" alt="Product Image">
                             <div class="icons">
-                                <a href="javascript:void(0)" class="fas fa-thumbs-up"></a>
+                                {{-- <a href="javascript:void(0)" class="fas fa-thumbs-up"></a> --}}
                                 <a href="#" class="cart-btn" data-bs-toggle="collapse"
                                     data-bs-target="#product-{{ $product->id }}" aria-expanded="false"
                                     aria-controls="product-{{ $product->id }}">ওর্ডার করুন</a>
-                                <a href="javascript:void(0)" class="fas fa-thumbs-up"></a>
+                                {{-- <a href="javascript:void(0)" class="fas fa-thumbs-up"></a> --}}
                             </div>
                         </div>
                         <div class="content">
@@ -204,7 +232,7 @@
 
                     {{-- Order form --}}
                     <div class="collapse" id="product-{{ $product->id }}">
-                        <div class="card card-body">
+                        <div class="card card-body order-section">
                             <form action="{{ route('order.store') }}" method="POST"
                                 class="row g-3 needs-validation">
                                 @csrf
@@ -253,15 +281,16 @@
                                         class="form-control" required>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <label for="address" class="form-label">শিপিং</label>
-                                    <select name="shipping_id" id="" class="form-control select" required>
-                                        <option value="" hidden>Select Shipping Method</option>
-                                        @foreach ($shipping as $n)
-                                            <option value="{{ $n->id }}">{{ $n->type }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                {{-- <div class="col-md-4"> --}}
+                                {{-- <label for="address" class="form-label">শিপিং</label> --}}
+                                <select name="shipping_id" id="" class="form-control select" hidden
+                                    required>
+                                    <option value="" hidden>Select Shipping Method</option>
+                                    @foreach ($shipping as $n)
+                                        <option value="{{ $n->id }}">{{ $n->type }}</option>
+                                    @endforeach
+                                </select>
+                                {{-- </div> --}}
 
                                 <label>পেমেন্ট প্রক্রিয়া:</label>
                                 <div class="form-check">
@@ -376,9 +405,11 @@
         <p>আপনাকে অনেক ধন্যবাদ আমদের ওয়েবসাইট টি ভিজিট করার জন্য</p>
     </div>
     <footer class="footer">
-        <p> All Right Reserved by <a href="TaiTaikids.com" class="text-warning">{{ $company_info->name }}</a>
-            Copyright © 2022 <br> Website Design and
-            Develop by MDNH</p>
+        <p>
+            All Right Reserved By <span class="footer-text">Leather Craft</span> <br>
+            Designed And developed by <span class="footer-text">Md. Nobir Hasan</span> <br>
+            Powdered by <span class="footer-text">Business Mind Academy</span>
+        </p>
     </footer>
 
     </div>
