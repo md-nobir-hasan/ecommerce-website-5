@@ -76,12 +76,12 @@ class OrderController extends Controller
         // = $request->payment_number;
         $insert->order_number ='ORD-'.strtoupper(Str::random(10));
         $insert->email = $request->email;
-        $shipping_price = Shipping::find($request->shipping_id);
+        // $shipping_price = Shipping::find($request->shipping_id);
 
         // calculation
         $subtotal =$request->product_price*$request->quantity;
-        $total = $subtotal + $shipping_price->price;
-        $insert->total_amount = $total;
+        // $total = $subtotal + $shipping_price->price;
+        $insert->total_amount = $subtotal;
         $insert->sub_total = $subtotal;
 
         $insert->country = $request->payment_number;

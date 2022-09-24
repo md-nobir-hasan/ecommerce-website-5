@@ -39,14 +39,16 @@
         .footer-text {
             color: #0BF729;
         }
+
         .free-delivary {
             display: inline-block;
-    border: 5px solid #eed282;
-    margin-bottom: 30px;
-    padding: 8px;
-    color: violet;
+            border: 5px solid #eed282;
+            margin-bottom: 30px;
+            padding: 8px;
+            color: violet;
         }
-        .fa-phone-alt{
+
+        .fa-phone-alt {
             color: #60ec1f;
         }
     </style>
@@ -118,7 +120,7 @@
                             @endif
                         </div>
                         <div class="col-md-4">
-                            <label for="address1" class="form-label" placeholder="Enter your Address">ঠিকানা
+                            <label for="address1" class="form-label" placeholder="Enter your Address">সম্পূর্ণ ঠিকানা
                                 <span style="color: red;">*</span></label>
                             <textarea name="address1" id="address1" class="form-control" aria-label="With textarea" required></textarea>
                         </div>
@@ -132,7 +134,7 @@
                         </div>
 
                         <div class="col-md-4">
-                            <label for="address" class="form-label">ই-মেইল</label>
+                            <label for="address" class="form-label">ই-মেইল(যদি থাকে)</label>
                             <input type="email" name="email" id="email" class="form-control"
                                 placeholder="Enter your address">
                         </div>
@@ -159,7 +161,7 @@
                             <input class="pamyment_method form-check-input" type="radio" name="pamyment_methods"
                                 id="flexRadioDefault1" value="Bkash" autocomplete="off">
                             <label class="form-check-label" for="flexRadioDefault1">
-                                Bkash
+                                বিকাশ
                             </label>
                         </div>
 
@@ -167,7 +169,7 @@
                             <input class="pamyment_method form-check-input" type="radio" name="pamyment_methods"
                                 id="flexRadioDefault2"value="Nagad" autocomplete="off">
                             <label class="form-check-label" for="flexRadioDefault2">
-                                Nagad
+                                নগদ
                             </label>
                         </div>
                         <div class="form-check">
@@ -180,7 +182,7 @@
                         </div>
 
                         <div class="row text-center">
-                            <div class="col-md-4" id="bkash" style="display:none">
+                            <div class="col-md-4" id="bkash" class="bkash" style="display:none">
                                 <label>আপনার বিকাশ নাম্বারঃ
                                     <input type="number" name="payment_number" id="bkash_input"
                                         class="form-control" placeholder="যে নাম্বার থেকে টাকা পাঠিয়েছেন" required>
@@ -188,7 +190,7 @@
                             </div>
                         </div>
                         <div class="row text-center">
-                            <div class="col-md-4" id="nagad" style="display:none">
+                            <div class="col-md-4" id="nagad" class="nagad" style="display:none">
                                 <label>আপনার নগদ নাম্বারঃ
                                     <input type="number" name="payment_number" id="nagad_input"
                                         class="form-control" placeholder="যে নাম্বার থেকে টাকা পাঠিয়েছেন" required>
@@ -314,7 +316,7 @@
                                         name="pamyment_methods" id="flexRadioDefault1" value="Bkash"
                                         autocomplete="off">
                                     <label class="form-check-label" for="flexRadioDefault1">
-                                        Bkash
+                                        বিকাশ
                                     </label>
                                 </div>
 
@@ -323,7 +325,7 @@
                                         name="pamyment_methods" id="flexRadioDefault2"value="Nagad"
                                         autocomplete="off">
                                     <label class="form-check-label" for="flexRadioDefault2">
-                                        Nagad
+                                        নগদ
                                     </label>
                                 </div>
                                 <div class="form-check">
@@ -337,18 +339,18 @@
                                 </div>
 
                                 <div class="row text-center">
-                                    <div class="col-md-4" id="bkash" style="display:none">
+                                    <div class="col-md-4" id="bkash1" class="bkash" style="display:none">
                                         <label>আপনার বিকাশ নাম্বারঃ
-                                            <input type="number" name="payment_number" id="bkash_input"
+                                            <input type="number" name="payment_number" class="bkash_input" id="bkash_input1"
                                                 class="form-control" placeholder="যে নাম্বার থেকে টাকা পাঠিয়েছেন"
                                                 required>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="row text-center">
-                                    <div class="col-md-4" id="nagad" style="display:none">
+                                    <div class="col-md-4" id="nagad1" class="nagad" style="display:none">
                                         <label>আপনার নগদ নাম্বারঃ
-                                            <input type="number" name="payment_number" id="nagad_input"
+                                            <input type="number" name="payment_number" class="nagad_input" id="nagad_input1CF"
                                                 class="form-control" placeholder="যে নাম্বার থেকে টাকা পাঠিয়েছেন"
                                                 required>
                                         </label>
@@ -454,16 +456,31 @@
                         $('#bkash_input').prop('disabled', false);
                         $('#nagad_input').prop('disabled', true);
                         $('#nagad').css('display', 'none');
+
+                         $('#bkash1').css('display', 'block');
+                        $('#bkash_input1').prop('disabled', false);
+                        $('#nagad_input1').prop('disabled', true);
+                        $('#nagad1').css('display', 'none');
                     } else if (value == 'Nagad') {
                         $('#bkash_input').prop('disabled', true);
                         $('#nagad_input').prop('disabled', false);
                         $('#bkash').css('display', 'none');
                         $('#nagad').css('display', 'block');
+
+                        $('#bkash_input1').prop('disabled', true);
+                        $('#nagad_input1').prop('disabled', false);
+                        $('#bkash1').css('display', 'none');
+                        $('#nagad1').css('display', 'block');
                     } else {
                         $('#bkash_input').prop('disabled', true);
                         $('#nagad_input').prop('disabled', true);
                         $('#bkash').css('display', 'none');
                         $('#nagad').css('display', 'none');
+
+                        $('#bkash_input1').prop('disabled', true);
+                        $('#nagad_input1').prop('disabled', true);
+                        $('#bkash1').css('display', 'none');
+                        $('#nagad1').css('display', 'none');
                     }
                 })
             });
