@@ -47,7 +47,7 @@
     color: violet;
         }
         .fa-phone-alt{
-            color: #e82a86;
+            color: #60ec1f;
         }
     </style>
 </head>
