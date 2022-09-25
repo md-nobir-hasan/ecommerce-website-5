@@ -424,7 +424,7 @@
     </div>
     <footer class="footer">
         <p>
-            All Right Reserved By <span class="footer-text">Leather Craft</span> <br>
+            All Right Reserved By <span class="footer-text">SUNNAHAT</span> <br>
             Designed And developed by <span class="footer-text">Md. Nobir Hasan</span> <br>
             Powdered by <span class="footer-text">Business Mind Academy</span>
         </p>
