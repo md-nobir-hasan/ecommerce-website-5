@@ -612,13 +612,7 @@ hr {
 .footer-top p {
     text-align: center;
 }
-.footer {
-    background-color: black;
-    color: white;
-    /* height: 50px; */
-    justify-items: center;
-    padding: 16px 8px 16px 8px;
-}
+
 .footer p {
     text-align: center;
     padding-top: 14px;

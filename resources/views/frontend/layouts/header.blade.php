@@ -275,7 +275,15 @@
         }
 
         /*end why us section */
+        /* footer section  */
+        ..footer {
+            background-color: black;
+            color: white;
+            justify-items: center;
+            padding: 16px 8px 16px 8px;
+        }
 
+        /* end footer section  */
 
         /*Animation*/
         /*rotate animation */
