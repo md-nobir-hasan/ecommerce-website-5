@@ -54,146 +54,150 @@
             <div class="box-container">
 
                 @if ($product != null)
-                    <div class="box">
-                        @php
-                            $discount = ($product->discount * $product->price) / 100;
-                        @endphp
-                        <span class="discount">-{{ round($discount) }}৳</span>
-                        <div class="image">
-                            <img class="img-fluid rounded-4 shadow-2-strong"
-                                src="{{ asset('product/' . $product->photo) }}" alt="Product Image">
-                            <div class="icons">
-                                {{-- <a href="javascript:void(0)" class="fas fa-thumbs-up"></a> --}}
-                                <a href="#" class="product-order-btn cart-btn" data-bs-toggle="collapse"
-                                    data-bs-target="#product-{{ $product->id }}" aria-expanded="false"
-                                    aria-controls="product-{{ $product->id }}">ওর্ডার করুন</a>
-                                {{-- <a href="javascript:void(0)" class="fas fa-thumbs-up"></a> --}}
-                            </div>
-                        </div>
-                        <div class="content">
-                            <h3>{{ $product->title }}</h3>
+                    @foreach ($product as $product)
+                        <div class="box">
                             @php
                                 $discount = ($product->discount * $product->price) / 100;
                             @endphp
-                            <div class="price"> {{ round($product->price - $discount) }}৳
-                                <span>{{ round($product->price) }}৳</span>
+                            <span class="discount">-{{ round($discount) }}৳</span>
+                            <div class="image">
+                                <img class="img-fluid rounded-4 shadow-2-strong"
+                                    src="{{ asset('product/' . $product->photo) }}" alt="Product Image">
+                                <div class="icons">
+                                    {{-- <a href="javascript:void(0)" class="fas fa-thumbs-up"></a> --}}
+                                    <a href="#" class="product-order-btn cart-btn" data-bs-toggle="collapse"
+                                        data-bs-target="#product-{{ $product->id }}" aria-expanded="false"
+                                        aria-controls="product-{{ $product->id }}">ওর্ডার করুন</a>
+                                    {{-- <a href="javascript:void(0)" class="fas fa-thumbs-up"></a> --}}
+                                </div>
+                            </div>
+                            <div class="content">
+                                <h3>{{ $product->title }}</h3>
+                                @php
+                                    $discount = ($product->discount * $product->price) / 100;
+                                @endphp
+                                <div class="price"> {{ round($product->price - $discount) }}৳
+                                    <span>{{ round($product->price) }}৳</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    {{-- Order form --}}
-                    <div class="collapse" id="product-{{ $product->id }}">
-                        <div class="card card-body order-section">
-                            <form action="{{ route('order.store') }}" method="POST" class="row g-3 needs-validation">
-                                @csrf
-                                <div class="col-12 text-center">
-                                    {{-- <label> Product Name <span class="text-danger"> {{ $data->title }}</span> --}}
-                                    <input type="hidden" name="product_title" value="{{ $product->title }}">
-                                    <input type="hidden" name="product_price" value="{{ $product->price }}">
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        {{-- Order form --}}
+                        <div class="collapse" id="product-{{ $product->id }}">
+                            <div class="card card-body order-section">
+                                <form action="{{ route('order.store') }}" method="POST"
+                                    class="row g-3 needs-validation">
+                                    @csrf
+                                    <div class="col-12 text-center">
+                                        {{-- <label> Product Name <span class="text-danger"> {{ $data->title }}</span> --}}
+                                        <input type="hidden" name="product_title" value="{{ $product->title }}">
+                                        <input type="hidden" name="product_price" value="{{ $product->price }}">
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
 
-                                    </label>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="name" class="form-label">নাম <span
-                                            style="color: red;">*</span></label>
-                                    <input name="first_name" type="text" class="form-control" id="name"
-                                        placeholder="Enter your name" required>
-                                    @if ($errors->has('first_name'))
-                                        <span class="text-danger">{{ $errors->first('first_name') }}</span>
-                                    @endif
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="address1" class="form-label" placeholder="Enter your Address">সম্পূর্ণ
-                                        ঠিকানা
-                                        <span style="color: red;">*</span></label>
-                                    <textarea name="address1" id="address1" class="form-control" aria-label="With textarea" required></textarea>
-                                </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="name" class="form-label">নাম <span
+                                                style="color: red;">*</span></label>
+                                        <input name="first_name" type="text" class="form-control" id="name"
+                                            placeholder="Enter your name" required>
+                                        @if ($errors->has('first_name'))
+                                            <span class="text-danger">{{ $errors->first('first_name') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="address1" class="form-label"
+                                            placeholder="Enter your Address">সম্পূর্ণ
+                                            ঠিকানা
+                                            <span style="color: red;">*</span></label>
+                                        <textarea name="address1" id="address1" class="form-control" aria-label="With textarea" required></textarea>
+                                    </div>
 
-                                <div class="col-md-4">
-                                    <label for="phone" class="form-label">ফোন নাম্বার
-                                        <span style="color: red;">*</span>
-                                    </label>
-                                    <input type="tel" name="phone" class="form-control" id="phone"
-                                        aria-describedby="inputGroupPrepend" required
-                                        placeholder="Enter your phone number">
-                                </div>
+                                    <div class="col-md-4">
+                                        <label for="phone" class="form-label">ফোন নাম্বার
+                                            <span style="color: red;">*</span>
+                                        </label>
+                                        <input type="tel" name="phone" class="form-control" id="phone"
+                                            aria-describedby="inputGroupPrepend" required
+                                            placeholder="Enter your phone number">
+                                    </div>
 
-                                <div class="col-md-4">
-                                    <label for="address" class="form-label">ই-মেইল(যদি থাকে)</label>
-                                    <input type="email" name="email" id="email" class="form-control"
-                                        placeholder="Enter your address">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="quantity" class="form-label">পরিমাণ</label>
-                                    <input type="number" name="quantity" value="1" id="quantity"
-                                        class="form-control" required>
-                                </div>
+                                    <div class="col-md-4">
+                                        <label for="address" class="form-label">ই-মেইল(যদি থাকে)</label>
+                                        <input type="email" name="email" id="email" class="form-control"
+                                            placeholder="Enter your address">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="quantity" class="form-label">পরিমাণ</label>
+                                        <input type="number" name="quantity" value="1" id="quantity"
+                                            class="form-control" required>
+                                    </div>
 
-                                {{-- <div class="col-md-4"> --}}
-                                {{-- <label for="address" class="form-label">শিপিং</label> --}}
-                                {{-- <select name="shipping_id" id="" class="form-control select" hidden
+                                    {{-- <div class="col-md-4"> --}}
+                                    {{-- <label for="address" class="form-label">শিপিং</label> --}}
+                                    {{-- <select name="shipping_id" id="" class="form-control select" hidden
                                     required>
                                     <option value="" hidden>Select Shipping Method</option>
                                     @foreach ($shipping as $n)
                                         <option value="{{ $n->id }}">{{ $n->type }}</option>
                                     @endforeach
                                 </select> --}}
-                                {{-- </div> --}}
+                                    {{-- </div> --}}
 
-                                <label>পেমেন্ট প্রক্রিয়া:</label>
-                                <div class="form-check">
-                                    <input class="pamyment_method1 form-check-input" type="radio"
-                                        name="pamyment_methods" id="flexRadioDefault1" value="Bkash"
-                                        autocomplete="off">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        বিকাশ
-                                    </label>
-                                </div>
-
-                                <div class="form-check">
-                                    <input class="pamyment_method1 form-check-input" type="radio"
-                                        name="pamyment_methods" id="flexRadioDefault2"value="Nagad"
-                                        autocomplete="off">
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        নগদ
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="pamyment_method1 form-check-input" type="radio"
-                                        name="pamyment_methods" id="checkbox3" value="CashonDelivery"
-                                        autocomplete="off">
-                                    <label class="form-check-label" for="checkbox3">
-                                        Cash On
-                                        Delivary
-                                    </label>
-                                </div>
-
-                                <div class="row text-center">
-                                    <div class="col-md-4" id="bkash1" class="bkash" style="display:none">
-                                        <label>আপনার বিকাশ নাম্বারঃ
-                                            <input type="number" name="payment_number" class="bkash_input"
-                                                id="bkash_input1" class="form-control"
-                                                placeholder="যে নাম্বার থেকে টাকা পাঠিয়েছেন" required>
+                                    <label>পেমেন্ট প্রক্রিয়া:</label>
+                                    <div class="form-check">
+                                        <input class="pamyment_method1 form-check-input" type="radio"
+                                            name="pamyment_methods" id="flexRadioDefault1" value="Bkash"
+                                            autocomplete="off">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            বিকাশ
                                         </label>
                                     </div>
-                                </div>
-                                <div class="row text-center">
-                                    <div class="col-md-4" id="nagad1" class="nagad" style="display:none">
-                                        <label>আপনার নগদ নাম্বারঃ
-                                            <input type="number" name="payment_number" class="nagad_input"
-                                                id="nagad_input1" class="form-control"
-                                                placeholder="যে নাম্বার থেকে টাকা পাঠিয়েছেন" required>
+
+                                    <div class="form-check">
+                                        <input class="pamyment_method1 form-check-input" type="radio"
+                                            name="pamyment_methods" id="flexRadioDefault2"value="Nagad"
+                                            autocomplete="off">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            নগদ
                                         </label>
                                     </div>
-                                </div>
+                                    <div class="form-check">
+                                        <input class="pamyment_method1 form-check-input" type="radio"
+                                            name="pamyment_methods" id="checkbox3" value="CashonDelivery"
+                                            autocomplete="off">
+                                        <label class="form-check-label" for="checkbox3">
+                                            Cash On
+                                            Delivary
+                                        </label>
+                                    </div>
 
-                                <div class="col-12 text-center">
-                                    <button class="btn btn-primary">ওর্ডার নিশিত করুন</button>
-                                </div>
-                            </form>
+                                    <div class="row text-center">
+                                        <div class="col-md-4" id="bkash1" class="bkash" style="display:none">
+                                            <label>আপনার বিকাশ নাম্বারঃ
+                                                <input type="number" name="payment_number" class="bkash_input"
+                                                    id="bkash_input1" class="form-control"
+                                                    placeholder="যে নাম্বার থেকে টাকা পাঠিয়েছেন" required>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row text-center">
+                                        <div class="col-md-4" id="nagad1" class="nagad" style="display:none">
+                                            <label>আপনার নগদ নাম্বারঃ
+                                                <input type="number" name="payment_number" class="nagad_input"
+                                                    id="nagad_input1" class="form-control"
+                                                    placeholder="যে নাম্বার থেকে টাকা পাঠিয়েছেন" required>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 text-center">
+                                        <button class="btn btn-primary">ওর্ডার নিশিত করুন</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
                 @endif
             </div>
         </section>

@@ -276,12 +276,14 @@
 
         /*end why us section */
         /* footer section  */
-        ..footer {
+        .footer {
             background-color: black;
             color: white;
             justify-items: center;
             padding: 16px 8px 16px 8px;
+            font-size: 16px;
         }
+
 
         /* end footer section  */
 

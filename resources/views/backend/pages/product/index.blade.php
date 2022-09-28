@@ -19,7 +19,7 @@
                             <h4>View Product</h4>
                         </span>
                         <span class="float-right">
-                            @if (count($products) < 1)
+                            @if (count($products) < 2)
                                 <a href="{{ route('product.create') }}" class="btn btn-info">Add new Product</a>
                             @endif
                         </span>
