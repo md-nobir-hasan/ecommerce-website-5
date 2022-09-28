@@ -4,6 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @php
+        $company_info = App\Models\CompanyInfo::first();
+    @endphp
     <title>{{ $company_info->title }}</title>
     <link rel="icon" type="image/png" href="{{ asset($company_info->logo) }}" />
     {{-- online css link --}}
