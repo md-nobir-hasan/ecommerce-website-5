@@ -880,19 +880,11 @@ input[type="submit"] {
 .custom_blog_title {
     text-align: center;
 }
-.why-us i {
-    font-size: 18px;
-}
+
 .why-us p {
     font-size: 15px;
     margin: 0px 0px 15px 0px;
 }
 
-/* 24-09-022 */
-.header-text {
-    margin-top: 125px !important;
-    font-size: 18px;
-}
-.video-footer-text {
-    font-size: 18px;
-}
+
+
