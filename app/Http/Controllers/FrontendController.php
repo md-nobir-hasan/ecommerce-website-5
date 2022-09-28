@@ -10,6 +10,12 @@ use App\Models\Product;
 
 class FrontendController extends Controller
 {
+
+     public function ajax($id){
+        $n['minfo'] = Product::all();
+        $n['shipping'] = Shipping::all();
+        return view('frontend.ajax_body',$n);
+    }
     /**
      * Display a listing of the resource.
      *

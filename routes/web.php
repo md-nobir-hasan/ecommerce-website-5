@@ -22,13 +22,14 @@ use App\Http\Controllers\OrderController;
 */
 
 Route::get('/', [FrontendController::class,'index'])->name('home');
+Route::get('order/ajax/{id}',[FrontendController::class,'ajax'])->name('order.ajax');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 Route::group(['middleware'=>['auth']],function(){
-    
+
     // Admin home
     Route::get('/admin',[HomeController::class,'home'])->name('admin');
 
@@ -87,6 +88,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/edit/{id}',[OrderController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[OrderController::class,'update'])->name('update');
         Route::get('/delete/{id}',[OrderController::class,'destroy'])->name('destroy');
+
     });
 });
 

@@ -136,8 +136,9 @@
             width: 144px;
         }
 
-        input {
-            height: 40px;
+        input,
+        select {
+            height: 32px;
             font-size: 16px !important;
         }
 
@@ -289,6 +290,13 @@
 
 
         /* end footer section  */
+
+        /* dialogify design  */
+        .payment-input {
+            margin-left: 10px !important;
+        }
+
+        /* end dialogify design  */
 
         /*Animation*/
         /*rotate animation */

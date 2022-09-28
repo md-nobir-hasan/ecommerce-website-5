@@ -26,9 +26,9 @@
                 <p class="text-wrap-head">কোথাও ঘুরতে গেলে খুব সহজেই নিয়ে যেতে পারবেন। উপহারের জন্য ও বেস্ট এই বেবি
                     ব্লাংকেট গুলো। অনেকেই উপহারের জন্য নিয়েছেন।বেবি বাউন্সার।</p>
             </div>
-            <div class="col-md-12  text-center">
-                <button class="order-button">Order Now</button>
-            </div>
+            {{-- <div class="col-md-12  text-center">
+                <button class="order-button order-btn-dialogify">Order Now</button>
+            </div> --}}
         </div>
 
         {{-- video section --}}
@@ -39,11 +39,11 @@
                 allowfullscreen></iframe>
         </div>
 
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-12  text-center">
-                <button class="order-button">Order Now</button>
+                <button class="order-button order-btn-dialogify">Order Now</button>
             </div>
-        </div>
+        </div> --}}
 
         {{-- product section --}}
         <section class="products" id="products">
@@ -65,9 +65,11 @@
                                     src="{{ asset('product/' . $product->photo) }}" alt="Product Image">
                                 <div class="icons">
                                     {{-- <a href="javascript:void(0)" class="fas fa-thumbs-up"></a> --}}
-                                    <a href="#" class="product-order-btn cart-btn" data-bs-toggle="collapse"
-                                        data-bs-target="#product-{{ $product->id }}" aria-expanded="false"
-                                        aria-controls="product-{{ $product->id }}">ওর্ডার করুন</a>
+                                    <a href="javascript:void(0)" class="product-order-btn cart-btn order-btn-dialogify"
+                                        id="{{ $product->id }}">ওর্ডার করুন
+                                    </a>
+                                    {{-- data-bs-toggle="collapse" data-bs-target="#product-{{ $product->id }}"
+                                        aria-expanded="false" aria-controls="product-{{ $product->id }}" --}}
                                     {{-- <a href="javascript:void(0)" class="fas fa-thumbs-up"></a> --}}
                                 </div>
                             </div>
@@ -133,16 +135,15 @@
                                             class="form-control" required>
                                     </div>
 
-                                    {{-- <div class="col-md-4"> --}}
-                                    {{-- <label for="address" class="form-label">শিপিং</label> --}}
-                                    {{-- <select name="shipping_id" id="" class="form-control select" hidden
-                                    required>
-                                    <option value="" hidden>Select Shipping Method</option>
-                                    @foreach ($shipping as $n)
-                                        <option value="{{ $n->id }}">{{ $n->type }}</option>
-                                    @endforeach
-                                </select> --}}
-                                    {{-- </div> --}}
+                                    <div class="col-md-4">
+                                        <label for="address" class="form-label">শিপিং</label>
+                                        <select name="shipping_id" id="" class="form-control" required>
+                                            <option value="" hidden>Select Shipping Method</option>
+                                            @foreach ($shipping as $n)
+                                                <option value="{{ $n->id }}">{{ $n->type }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
                                     <label>পেমেন্ট প্রক্রিয়া:</label>
                                     <div class="form-check">
@@ -387,6 +388,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://www.jqueryscript.net/demo/Dialog-Modal-Dialogify/dist/dialogify.min.js"></script>
     <script>
         // $(document).ready(function({
         //     $('#payment_method').on()(function() {
@@ -395,69 +397,79 @@
         //     });
         // }));
         $(document).ready(function() {
-            $('.pamyment_method').each(function(index) {
-                $(this).on('click', function() {
-                    var value = $(this).val();
-                    if (value == 'Bkash') {
-                        $('#bkash').css('display', 'block');
-                        $('#bkash_input').prop('disabled', false);
-                        $('#nagad_input').prop('disabled', true);
-                        $('#nagad').css('display', 'none');
+            // Dialogify
+            $('.order-btn-dialogify').each(function(index) {
+                $(this).click(function() {
 
-                        $('#bkash1').css('display', 'block');
-                        $('#bkash_input1').prop('disabled', false);
-                        $('#nagad_input1').prop('disabled', true);
-                        $('#nagad1').css('display', 'none');
-                    } else if (value == 'Nagad') {
-                        $('#bkash_input').prop('disabled', true);
-                        $('#nagad_input').prop('disabled', false);
-                        $('#bkash').css('display', 'none');
-                        $('#nagad').css('display', 'block');
+                    var product_id = $(this).attr('id');
 
-                        $('#bkash_input1').prop('disabled', true);
-                        $('#nagad_input1').prop('disabled', false);
-                        $('#bkash1').css('display', 'none');
-                        $('#nagad1').css('display', 'block');
-                    } else {
-                        $('#bkash_input').prop('disabled', true);
-                        $('#nagad_input').prop('disabled', true);
-                        $('#bkash').css('display', 'none');
-                        $('#nagad').css('display', 'none');
+                    var options = {
+                        ajaxPrefix: ''
+                    };
+                    new Dialogify('{{ url('order/ajax') }}/' + product_id, options)
+                        .title("Confirm Order")
+                        .buttons([{
+                                text: "Cancle",
+                                type: Dialogify.BUTTON_DANGER,
+                                click: function(e) {
+                                    this.close();
+                                }
+                            },
+                            {
+                                text: 'Confirm Order',
+                                type: Dialogify.BUTTON_PRIMARY,
+                                click: function(e) {
+                                    // var discount_v = $('#discount_offer').val();
 
-                        $('#bkash_input1').prop('disabled', true);
-                        $('#nagad_input1').prop('disabled', true);
-                        $('#bkash1').css('display', 'none');
-                        $('#nagad1').css('display', 'none');
-                    }
-                })
-            });
+                                    //Regex for discount validation
+                                    // var valid_dis = /(^[0-9]{1,2}%{1}$)/m;
 
-            $('.pamyment_method1').each(function(index) {
-                $(this).on('click', function() {
-                    $('#nagad_input').prop('disabled', true);
-                    $('#bkash_input').prop('disabled', true);
-                    var value = $(this).val();
-                    if (value == 'Bkash') {
-                        $('#bkash1').css('display', 'block');
-                        $('#bkash_input1').prop('disabled', false);
-                        $('#nagad_input1').prop('disabled', true);
-                        $('#nagad1').css('display', 'none');
-                    } else if (value == 'Nagad') {
+                                    // if (!valid_dis.test(discount_v)) {
+                                    //     alert(
+                                    //         "You have to input one or two number and one % as discount"
+                                    //     );
+                                    // } else {
 
-                        $('#bkash_input1').prop('disabled', true);
-                        $('#nagad_input1').prop('disabled', false);
-                        $('#bkash1').css('display', 'none');
-                        $('#nagad1').css('display', 'block');
-                    } else {
-                        $('#bkash_input1').prop('disabled', true);
-                        $('#nagad_input1').prop('disabled', true);
-                        $('#bkash1').css('display', 'none');
-                        $('#nagad1').css('display', 'none');
-                    }
-                })
+                                    var form_data = new FormData();
+                                    form_data.append('name', $('#name').val());
+                                    form_data.append('address', $('#address')
+                                        .val());
+                                    form_data.append('discount', discount_v);
+                                    form_data.append('id', data[0].cake_id);
+                                    $.ajax({
+                                        method: "POST",
+                                        url: '{{ url('order.store') }}',
+                                        data: form_data,
+                                        // dataType:'json',
+                                        contentType: false,
+                                        cache: false,
+                                        processData: false,
+                                        success: function(value) {
+                                            alert(value);
+                                            // $.ajax({
+                                            //     cache: false,
+                                            //     url: "{{ url('order.store') }}",
+                                            //     method: "POST",
+                                            //     success: function(
+                                            //         data) {
+                                            //         $("#show_data")
+                                            //             .html(
+                                            //                 data
+                                            //             );
+                                            //     }
+                                            // });
+
+                                        }
+                                    });
+                                }
+                                // }
+                            }
+                        ]).showModal();
+                });
             });
         });
     </script>
+
 </body>
 
 </html>
