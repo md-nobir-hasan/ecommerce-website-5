@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Shipping;
 use App\Models\Product;
+use App\Models\CompanyContact;
 use App\User;
 use PDF;
 use Notification;
@@ -18,7 +19,7 @@ use App\Notifications\StatusNotification;
 class OrderController extends Controller
 {
 
-   
+
     /**
      * Display a listing of the resource.
      *
@@ -76,13 +77,14 @@ class OrderController extends Controller
         $insert->pamyment_methods = $request->pamyment_methods;
         $insert->payment_number = $request->payment_number;
         // = $request->payment_number;
-        $insert->order_number ='ORD-'.strtoupper(Str::random(10));
+        $order_number = 'ORD-'.strtoupper(Str::random(10));
+        $insert->order_number = $order_number;
         $insert->email = $request->email;
-        // $shipping_price = Shipping::find($request->shipping_id);
+        $shipping_price = Shipping::find($request->shipping_id);
 
         // calculation
         $subtotal =$request->product_price*$request->quantity;
-        // $total = $subtotal + $shipping_price->price;
+        $total = $subtotal + $shipping_price->price;
         $insert->total_amount = $subtotal;
         $insert->sub_total = $subtotal;
 
@@ -93,6 +95,19 @@ class OrderController extends Controller
         $product_update = Product::find($request->product_id);
         $product_update->stock = $product_update->stock - $request->quantity;
         $product_update->save();
+
+        $order_details['order_number'] = $order_number;
+          $order_details['date'] = date('d-m-Y');
+          $order_details['total'] = $request->product_price;
+          $order_details['product_price'] = $request->product_price;
+          $order_details['payment_methdod'] = 'ক্যাশ অন ডেলিভারি';
+          $order_details['product_name'] = $request->product_title;
+          $order_details['subtotal'] = $request->product_price;
+          $order_details['shipping'] = $shipping_price->price;
+          $order_details['client_name'] = $request->first_name;
+          $order_details['client_phone'] = $request->phone;
+          $order_details['client_address'] = $request->address1;
+          $order_details['company_contact'] = CompanyContact::first();
         // dd($product_update->stock);
         // $order_data=$request->all();
         // $order_data['order_number']='ORD-'.strtoupper(Str::random(10));
@@ -134,7 +149,7 @@ class OrderController extends Controller
 
         // dd($users);
         request()->session()->flash('success','Your product successfully placed in order');
-        return redirect()->route('home')->with('script_msg','<script> alert("Your order successfully received");</script>');
+        return view('frontend.thanks',$order_details);
     }
 
     /**
