@@ -93,8 +93,8 @@
                                         class="row g-3 needs-validation">
                                         @csrf
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel{{ $loop->index }}">Modal
-                                                title
+                                            <h5 class="modal-title" id="exampleModalLabel{{ $loop->index }}">Order
+                                                Form
                                             </h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
@@ -388,7 +388,7 @@
     <div class="footer-top">
         <p>আপনাকে অনেক ধন্যবাদ আমদের ওয়েবসাইট টি ভিজিট করার জন্য</p>
     </div>
-    <footer class="footer">
+    <footer class="footer" style="height: auto">
         <p>
             All Right Reserved By <span class="footer-text">JARIFTRADING.COM</span> <br>
             Designed And developed by <span class="footer-text">Md. Nobir Hasan</span> <br>

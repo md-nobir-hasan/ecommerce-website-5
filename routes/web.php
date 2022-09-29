@@ -23,6 +23,7 @@ use App\Http\Controllers\OrderController;
 
 Route::get('/', [FrontendController::class,'index'])->name('home');
 Route::get('order/ajax/{id}',[FrontendController::class,'ajax'])->name('order.ajax');
+ Route::post('order/store',[OrderController::class,'store'])->name('order.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -84,7 +85,7 @@ Route::group(['middleware'=>['auth']],function(){
     Route::group(['as' => 'order.', 'prefix' => 'order'], function() {
         Route::get('/index',[OrderController::class,'index'])->name('index');
         Route::get('/create',[OrderController::class,'create'])->name('create');
-        Route::post('/store',[OrderController::class,'store'])->name('store');
+
         Route::get('/edit/{id}',[OrderController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[OrderController::class,'update'])->name('update');
         Route::get('/delete/{id}',[OrderController::class,'destroy'])->name('destroy');
