@@ -99,7 +99,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body ml-5">
                                             {{-- Hidden field  --}}
                                             <input type="hidden" name="product_title" value="{{ $product->title }}">
                                             <input type="hidden" name="product_price" value="{{ $product->price }}">
@@ -149,7 +149,8 @@
                                                     required>
                                                     <option value="" hidden>Select Shipping Method</option>
                                                     @foreach ($shipping as $n)
-                                                        <option value="{{ $n->id }}">{{ $n->type }}
+                                                        <option value="{{ $n->id }}">
+                                                            {{ $n->type . '(' . $n->price . ')' }}
                                                         </option>
                                                     @endforeach
                                                 </select>

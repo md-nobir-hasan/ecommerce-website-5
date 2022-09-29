@@ -291,12 +291,20 @@
 
         /* end footer section  */
 
-        /* dialogify design  */
+        /* Modal design  */
         .payment-input {
             margin-left: 10px !important;
         }
 
-        /* end dialogify design  */
+        .modal-body {
+            position: relative;
+            flex: 1 1 auto;
+            padding: var(--bs-modal-padding);
+            margin-left: 25px;
+            margin-right: 25px;
+        }
+
+        /* end Modal design  */
 
         /*Animation*/
         /*rotate animation */
