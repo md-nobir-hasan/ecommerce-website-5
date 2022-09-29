@@ -278,6 +278,10 @@
             padding-right: 10px;
         }
 
+        .des-dev {
+            margin-right: 5px;
+        }
+
         /*end why us section */
         /* footer section  */
         .footer {

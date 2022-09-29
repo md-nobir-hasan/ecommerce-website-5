@@ -230,9 +230,9 @@
                     <h1 class="why-us-header">বেবি বাউন্সার ব্যবহার করলে কি হয় </h1>
                 </div>
 
-                <div class="row ">
+                <div class="row">
 
-                    <div class="col-md-4 shadow-lg gx-5 p-3 mb-5 bg-body rounded justify-content-md-center">
+                    <div class="col-md-4 shadow-lg gx-5 p-3 mb-5 bg-body rounded justify-content-md-center des-dev">
                         <div class="row">
                             <span class="why-us-emoji"><i class="fas fa-check-circle font-awesome-icon "></i></span>
                         </div>
@@ -244,7 +244,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 shadow-lg p-3 mb-5 bg-body rounded justify-content-md-center">
+                    <div class="col-md-4 des-dev shadow-lg p-3 mb-5 bg-body rounded justify-content-md-center">
                         <div class="row">
                             <span class="why-us-emoji"><i class="fas fa-check-circle font-awesome-icon "></i></span>
                         </div>
@@ -256,7 +256,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 shadow-lg p-3 mb-5 bg-body rounded justify-content-md-center">
+                    <div class="col-md-3 des-dev shadow-lg p-3 mb-5  bg-body rounded justify-content-md-center">
                         <div class="row">
                             <span class="why-us-emoji"><i class="fas fa-check-circle font-awesome-icon "></i></span>
                         </div>
@@ -268,7 +268,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 shadow-lg p-3 mb-5 bg-body rounded justify-content-md-center">
+                    <div class="col-md-4 des-dev shadow-lg p-3 mb-5 bg-body rounded justify-content-md-center">
                         <div class="row">
                             <span class="why-us-emoji"><i class="fas fa-check-circle font-awesome-icon "></i></span>
                         </div>
@@ -280,7 +280,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 shadow-lg p-3 mb-5 bg-body rounded justify-content-md-center">
+                    <div class="col-md-4 des-dev shadow-lg p-3 mb-5 bg-body rounded justify-content-md-center">
                         <div class="row">
                             <span class="why-us-emoji"><i class="fas fa-check-circle font-awesome-icon "></i></span>
                         </div>
@@ -292,7 +292,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 shadow-lg p-3 mb-5 bg-body rounded justify-content-md-center">
+                    <div class="col-md-3 shadow-lg p-3 mb-5 bg-body rounded justify-content-md-center">
                         <div class="row">
                             <span class="why-us-emoji"><i class="fas fa-check-circle font-awesome-icon "></i></span>
                         </div>
