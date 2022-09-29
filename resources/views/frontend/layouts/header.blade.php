@@ -14,10 +14,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     {{-- custom css link --}}
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}">
+    <link href="https://fonts.maateen.me/adorsho-lipi/font.css" rel="stylesheet">
+    <link href="https://fonts.maateen.me/apona-lohit/font.css" rel="stylesheet">
+     <link href="https://fonts.maateen.me/mukti/font.css" rel="stylesheet">
+
+    <link href="https://fonts.maateen.me/apona-lohit/font.css" rel="stylesheet">
+
+
+
     {{-- <link rel="stylesheet" href="{{ asset('css/css/style1.css') }}"> --}}
     <style>
         body {
             font-size: 20px;
+           font-family: 'AponaLohit', Arial, sans-serif !important;
+
         }
 
         /* Nav bar  */
@@ -97,6 +107,7 @@
             font-weight: bold;
             padding: 9px;
             font-size: 31px;
+            font-family: 'AponaLohit', sans-serif;
         }
 
 
