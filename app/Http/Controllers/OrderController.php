@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Shipping;
 use App\Models\Product;
 use App\Models\CompanyContact;
+use App\Models\OrderStatus;
 use App\User;
 use PDF;
 use Notification;
@@ -15,6 +16,7 @@ use Helper;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\StatusNotification;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -27,7 +29,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders=Order::with(['shipping'])->orderBy('id','DESC')->paginate(10);
+        $orders=Order::with(['shipping'])->orderBy('id','DESC')->where('status','active')->get();
         return view('backend.pages.order.index')->with('orders',$orders);
     }
 
@@ -76,6 +78,7 @@ class OrderController extends Controller
         $insert->shipping_id = 1;
         $insert->pamyment_methods = $request->pamyment_methods;
         $insert->payment_number = $request->payment_number;
+
         // = $request->payment_number;
         $order_number = 'ORD-'.strtoupper(Str::random(10));
         $insert->order_number = $order_number;
@@ -90,11 +93,22 @@ class OrderController extends Controller
 
         $insert->country = $request->payment_number;
         $insert->last_name = $request->payment_number;
+
+        // Status Status
+        $order_statuses = OrderStatus::first();
+        if($order_statuses !=null){
+            $insert->order_status = $order_statuses->name;
+        }else{
+             $insert->order_status = 'New';
+        }
+         $insert->status = 'active';
         $insert->save();
 
         $product_update = Product::find($request->product_id);
-        $product_update->stock = $product_update->stock - $request->quantity;
+       if($product_update != null){
+         $product_update->stock = $product_update->stock - $request->quantity;
         $product_update->save();
+       }
 
         $order_details['order_number'] = $order_number;
           $order_details['date'] = date('d-m-Y');
@@ -108,46 +122,7 @@ class OrderController extends Controller
           $order_details['client_phone'] = $request->phone;
           $order_details['client_address'] = $request->address1;
           $order_details['company_contact'] = CompanyContact::first();
-        // dd($product_update->stock);
-        // $order_data=$request->all();
-        // $order_data['order_number']='ORD-'.strtoupper(Str::random(10));
-        // // $order_data['user_id']=$request->user()->id;
-        // $order_data['shipping_id']=$request->shipping;
-        // // $shipping=Shipping::where('id',$order_data['shipping_id'])->pluck('price');
-        // // return session('coupon')['value'];
-        // // $order_data['sub_total']=Helper::totalCartPrice();
-        // $order_data['quantity']=$request->quantity;
-        // // return $order_data['total_amount'];
-        // $order_data['status']="new";
-        // if(request('payment_method')=='paypal'){
-        //     $order_data['payment_method']='paypal';
-        //     $order_data['payment_status']='paid';
-        // }
-        // else{
-        //     $order_data['payment_method']='cod';
-        //     $order_data['payment_status']='Unpaid';
-        // }
-        // $order->fill($order_data);
-        // $status=$order->save();
-        // if($order)
-        // // dd($order->id);
-        // $users=User::where('role','admin')->first();
-        // $details=[
-        //     'title'=>'New order created',
-        //     'actionURL'=>route('order.show',$order->id),
-        //     'fas'=>'fa-file-alt'
-        // ];
-        // Notification::send($users, new StatusNotification($details));
-        // if(request('payment_method')=='paypal'){
-        //     return redirect()->route('payment')->with(['id'=>$order->id]);
-        // }
-        // else{
-        //     session()->forget('cart');
-        //     session()->forget('coupon');
-        // }
-        // Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
 
-        // dd($users);
         request()->session()->flash('success','Your product successfully placed in order');
         return view('frontend.thanks',$order_details);
     }
@@ -210,17 +185,65 @@ class OrderController extends Controller
         return redirect()->route('order.index');
     }
 
+    // trash function
+    public function trash(){
+        $orders=Order::with(['shipping'])->orderBy('id','DESC')->where('status','inactive')->get();
+        return view('backend.pages.order.trash')->with('orders',$orders);
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+  public function delete($id)
     {
         $order=Order::find($id);
+        $order->status = 'inactive';
         if($order){
-            $status=$order->delete();
+            $status=$order->save();
+            if($status){
+                request()->session()->flash('success','Ordered item successfully moved to trash');
+            }
+            else{
+                request()->session()->flash('error','Order item can not moved to trash');
+            }
+            return redirect()->route('order.index');
+        }
+        else{
+            request()->session()->flash('error','Order item can not found');
+            return redirect()->back();
+        }
+    }
+
+    //Restore function
+      public function restore($id)
+    {
+        $order=Order::find($id);
+        $order->status = 'active';
+        if($order){
+            $status=$order->save();
+            if($status){
+                request()->session()->flash('success','Ordered item successfully restored');
+            }
+            else{
+                request()->session()->flash('error','Order item can not restored');
+            }
+            return redirect()->route('order.index');
+        }
+        else{
+            request()->session()->flash('error','Order item can not found');
+            return redirect()->back();
+        }
+    }
+
+
+     public function destroy($id)
+    {
+        $order=Order::find($id);
+        $order->status = Auth::user()->id;
+        if($order){
+            $status=$order->save();
             if($status){
                 request()->session()->flash('success','Order Successfully deleted');
             }

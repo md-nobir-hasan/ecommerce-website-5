@@ -19,7 +19,7 @@
                             <h4>View Order</h4>
                         </span>
                         <span class="float-right">
-                            <a href="{{ route('order.trash') }}" class="btn btn-danger">Trash</a>
+                            <a href="{{ route('order.index') }}" class="btn btn-info">Back</a>
                         </span>
                     </div>
                     <div class="card-body">
@@ -72,12 +72,13 @@
                                             </td>
                                             <td class="text-middle py-0 align-middle">
                                                 <div class="btn-group">
-                                                    {{-- <a href="{{ route('order.edit', $order->id) }}"
-                                                        class="btn btn-dark btnEdit" title="Edit"><i
-                                                            class="fas fa-edit"></i></a> --}}
-                                                    <a href="{{ route('order.delete', $order->id) }}"
-                                                        class="btn btn-danger btnDelete" title="Move to trash"><i
-                                                            class="fas fa-trash"></i></a>
+                                                    <a href="{{ route('order.restore', $order->id) }}"
+                                                        class="btn btn-dark btnEdit" title="Restore"><i
+                                                            class="fas fa-trash-restore">Restore</i></a>
+                                                    <a title="Permanently delete"
+                                                        href="{{ route('order.destroy', $order->id) }}"
+                                                        class="btn btn-danger btnDelete"><i
+                                                            class="fas fa-trash">Delete</i></a>
                                                 </div>
                                             </td>
                                         </tr>

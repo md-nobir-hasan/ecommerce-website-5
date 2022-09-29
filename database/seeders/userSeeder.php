@@ -22,7 +22,7 @@ class userSeeder extends Seeder
             'roll' => "super_admin",
             'password' => Hash::make(1518460933),
             ],
-            ['name' => "Nobir Admin",
+            ['name' => "Admin",
             'email' => "admin7890@gmail.com",
             'phone' => "123",
             'roll' => "admin",

@@ -132,3 +132,34 @@
         </li>
     </ul>
 </li>
+
+{{-- Add Order status   --}}
+@if (Auth::user()->roll == 'super_admin')
+    <li class="nav-item {{ Request::is('order-status/*') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+                Order Status
+                <i class="fas fa-angle-left right"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('order-status.index') }}"
+                    class="nav-link {{ Request::is('order/index') ? 'active' : '' }}">
+                    <i class="nav-icon far fa-circle"></i>
+                    <p>Show Order status</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('order-status.create') }}"
+                    class="nav-link {{ Request::is('order/index') ? 'active' : '' }}">
+                    <i class="nav-icon far fa-plus"></i>
+                    <p>Add Order status</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+@endif

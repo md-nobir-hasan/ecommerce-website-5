@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderStatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,10 +86,23 @@ Route::group(['middleware'=>['auth']],function(){
     Route::group(['as' => 'order.', 'prefix' => 'order'], function() {
         Route::get('/index',[OrderController::class,'index'])->name('index');
         Route::get('/create',[OrderController::class,'create'])->name('create');
-
         Route::get('/edit/{id}',[OrderController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[OrderController::class,'update'])->name('update');
-        Route::get('/delete/{id}',[OrderController::class,'destroy'])->name('destroy');
+        Route::get('/trash',[OrderController::class,'trash'])->name('trash');
+        Route::get('/delete/{id}',[OrderController::class,'delete'])->name('delete');
+        Route::get('/restore/{id}',[OrderController::class,'restore'])->name('restore');
+        Route::get('/destroy/{id}',[OrderController::class,'destroy'])->name('destroy');
+
+    });
+
+    //Order Status
+    Route::group(['as' => 'order-status.', 'prefix' => 'order-status'], function() {
+        Route::get('/index',[OrderStatusController::class,'index'])->name('index');
+        Route::get('/create',[OrderStatusController::class,'create'])->name('create');
+        Route::post('/store',[OrderStatusController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[OrderStatusController::class,'edit'])->name('edit');
+        Route::patch('/update',[OrderStatusController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[OrderStatusController::class,'destroy'])->name('destroy');
 
     });
 });

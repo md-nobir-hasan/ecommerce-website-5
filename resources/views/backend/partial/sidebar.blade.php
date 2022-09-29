@@ -1,9 +1,13 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    @php
+        $company_info = App\Models\CompanyInfo::first();
+    @endphp
     <a href="{{ route('home') }}" class="brand-link">
-        <img src="@if (isset($sit->image)) {{ asset($site->image) }}@else{{ asset('assets/images/default/site-logo.png') }} @endif" alt=""
-            class="brand-image img-circle elevation-3">
+        <img src="@if (isset($company_info->logo)) {{ asset($company_info->logo) }}@else{{ asset('assets/images/default/site-logo.png') }} @endif"
+            alt="" class="brand-image img-circle elevation-3">
         <span class="brand-text font-weight-light">
-            @if (isset($site->name)) {{$site->name}} @else{{'Ecommerce Website'}}
+            @if (isset($company_info->name))
+                {{ $company_info->name }} @else{{ 'Ecommerce Website' }}
             @endif
 
         </span>

@@ -31,13 +31,14 @@ class CreateOrdersTable extends Migration
             $table->float('total_amount')->nullable();
             $table->string('payment_method')->nullable();
             $table->string('payment_status')->nullable();
-            $table->enum('status',['new','process','delivered','cancel'])->default('new');
+            $table->string('order_status');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('SET NULL');
             $table->foreign('shipping_id')->references('id')->on('shippings')->onDelete('SET NULL');
             $table->string('last_name')->nullable();
             $table->string('country')->nullable();
             $table->string('post_code')->nullable();
             $table->text('address2')->nullable();
+              $table->string('status');
             $table->timestamps();
         });
     }

@@ -51,7 +51,7 @@ class ShippingController extends Controller
         else{
             request()->session()->flash('error','Error, Please try again');
         }
-        return redirect()->route('shipping.index');
+        return redirect()->route('order-status.index');
     }
 
     /**
