@@ -59,4 +59,24 @@ class OrderStatusController extends Controller
         }
         return redirect()->route('order-status.index');
     }
+
+    public function ajax(){
+        $n['minfo'] = OrderStatus::where('status','active')->get();
+        // $n['shipping'] = Shipping::all();
+        return view('backend.pages.order_status.ajax-body',$n);
+    }
+    public function OrderStatusAssign(){
+        $name = $_GET['name'];
+        $order_id = $_GET['order_id'];
+        $order_status_update = Order::find($order_id);
+        $order_status_update->order_status = $name;
+        $msg = $order_status_update->save();
+
+        if($msg){
+            $msg= $name;
+        }else{
+            $msg=0;
+        }
+        return $msg;
+    }
 }
