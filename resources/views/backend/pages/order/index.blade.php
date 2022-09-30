@@ -37,7 +37,7 @@
                                         <th>Quantity</th>
                                         <th>Shiping Charge</th>
                                         <th>Total Amount</th>
-                                        <th>Payment Number</th>
+                                        {{-- <th>Payment Number</th> --}}
                                         <th>Payment Method</th>
                                         <th>Ordered Time</th>
                                         <th>Status</th>
@@ -56,7 +56,7 @@
                                             <td>{{ $order->shipping->price }}</td>
                                             <td>TK{{ number_format($order->total_amount, 2) }}
                                             </td>
-                                            <td>{{ $order->payment_number }}</td>
+                                            {{-- <td>{{ $order->payment_number }}</td> --}}
                                             <td>{{ $order->pamyment_methods }}</td>
                                             <td>{{ $order->created_at->diffForHumans() }}</td>
                                             <td>

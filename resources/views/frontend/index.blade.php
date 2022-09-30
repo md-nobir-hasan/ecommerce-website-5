@@ -158,7 +158,7 @@
 
                                             <label class="mt-4 mb-2">পেমেন্ট প্রক্রিয়া:</label>
 
-                                            <div class="form-check payment-input">
+                                            <div class="form-check payment-input d-none">
                                                 <input class="pamyment_method form-control form-check-input ml-3 "
                                                     type="radio" name="pamyment_methods" id="flexRadioDefault1"
                                                     nobir='{{ $loop->index }}' value="Bkash">
@@ -167,7 +167,7 @@
                                                 </label>
                                             </div>
 
-                                            <div class="form-check payment-input">
+                                            <div class="form-check payment-input d-none">
                                                 <input class="pamyment_method form-control form-check-input ml-3 "
                                                     type="radio" name="pamyment_methods" id="flexRadioDefault2"
                                                     value="Nagad" nobir='{{ $loop->index }}'>
@@ -178,7 +178,7 @@
                                             <div class="form-check payment-input">
                                                 <input class="pamyment_method form-control form-check-input ml-3"
                                                     type="radio" name="pamyment_methods" id="checkbox3"
-                                                    value="CashonDelivery" nobir='{{ $loop->index }}'>
+                                                    value="CashonDelivery" nobir='{{ $loop->index }}' checked>
                                                 <label class="form-check-label " for="checkbox3">
                                                     Cash On
                                                     Delivary
@@ -192,7 +192,8 @@
                                                         <input type="number" name="payment_number"
                                                             class="bkash_input form-control"
                                                             id="bkash_input{{ $loop->index }}" class="form-control"
-                                                            placeholder="যে নাম্বার থেকে টাকা পাঠিয়েছেন" required>
+                                                            placeholder="যে নাম্বার থেকে টাকা পাঠিয়েছেন" required
+                                                            disabled>
                                                     </label>
                                                 </div>
                                             </div>
@@ -203,7 +204,8 @@
                                                         <input type="number" name="payment_number"
                                                             class="nagad_input form-control"
                                                             id="nagad_input{{ $loop->index }}" class="form-control"
-                                                            placeholder="যে নাম্বার থেকে টাকা পাঠিয়েছেন" required>
+                                                            placeholder="যে নাম্বার থেকে টাকা পাঠিয়েছেন" required
+                                                            disabled>
                                                     </label>
                                                 </div>
                                             </div>
