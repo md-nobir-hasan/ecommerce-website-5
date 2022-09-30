@@ -317,12 +317,12 @@
                 <h1 class="why-us-header">বেবি বাউন্সার গুলো আপনারা কেন নিবেন </h1>
             </div>
 
-            <div class="des-1">
+            {{-- <div class="des-1">
                 <i class="fas fa-check-circle"></i>
                 <h1>
                     চুলার অথবা গ্যাসের লুজ পাইপের যেকোনো ধরনের লিকেজ হলে অটোমেটিক গ্যাস বন্ধ হয়ে যাবে
                 </h1>
-            </div>
+            </div> --}}
             <div class="des-1">
                 <i class="fas fa-check-circle"></i>
                 <h1>
