@@ -34,15 +34,15 @@
 
             <div class="order-details-div border-bottom p-3">
                 <div class="order-details-text">{{ $product_name }}</div>
-                <div class="order-details-text">{{ $product_price }}рз│</div>
+                <div class="order-details-text">{{ $product_price }}৳</div>
             </div>
             <div class="order-details-div border-bottom p-3">
                 <div class="order-details-text">Shipping</div>
-                <div class="order-details-text">{{ $shipping }}рз│</div>
+                <div class="order-details-text">{{ $shipping }}৳</div>
             </div>
             <div class="order-details-div border-bottom p-3">
                 <div class="order-details-text">Subtotal</div>
-                <div class="order-details-text">{{ $subtotal }}рз│</div>
+                <div class="order-details-text">{{ $subtotal }}৳</div>
             </div>
 
             <div class="order-details-div border-bottom p-3">
@@ -51,7 +51,7 @@
             </div>
             <div class="order-details-div border-bottom p-3">
                 <div class="order-details-text">total</div>
-                <div class="order-details-text">{{ $total }}рз│</div>
+                <div class="order-details-text">{{ $total }}৳</div>
             </div>
         </div>
     </div>
