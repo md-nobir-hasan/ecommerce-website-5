@@ -314,15 +314,15 @@
         <section class="why-us2">
 
             <div class="row p-3 mb-5 rounded justify-content-md-center">
-                <h1 class="why-us-header">বেবি বাউন্সার গুলো আপনারা কেন নিবেন </h1>
+                <h1 class="why-us-header">বেবি বাউন্সার গুলো আপনারা কেন নিবেন ?</h1>
             </div>
 
-            {{-- <div class="des-1">
+            <div class="des-1">
                 <i class="fas fa-check-circle"></i>
                 <h1>
-                    চুলার অথবা গ্যাসের লুজ পাইপের যেকোনো ধরনের লিকেজ হলে অটোমেটিক গ্যাস বন্ধ হয়ে যাবে
+                    এটাতে বসিয়ে রেখে আপনার বাচ্চাকে সামনে রেখে আপনার বাড়ির সব কাজ করতে পারবেন খুব সহজে
                 </h1>
-            </div> --}}
+            </div>
             <div class="des-1">
                 <i class="fas fa-check-circle"></i>
                 <h1>
