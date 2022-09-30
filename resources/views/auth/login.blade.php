@@ -20,13 +20,6 @@
             <h1>Login</h1>
         </div> --}}
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            @foreach ($errors->all() as $err)
-                <p>{{ $err }}</p>
-            @endforeach
-        </div>
-    @endif
     <section class="vh-100" style="background-color: #508bfc;">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">

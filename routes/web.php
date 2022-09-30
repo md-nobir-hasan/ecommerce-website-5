@@ -23,7 +23,6 @@ use App\Http\Controllers\OrderStatusController;
 */
 
 Route::get('/', [FrontendController::class,'index'])->name('home');
-Route::get('order/ajax/{id}',[FrontendController::class,'ajax'])->name('order.ajax');
  Route::post('order/store',[OrderController::class,'store'])->name('order.store');
 
 Route::get('/dashboard', function () {
@@ -103,6 +102,8 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/edit/{id}',[OrderStatusController::class,'edit'])->name('edit');
         Route::patch('/update',[OrderStatusController::class,'update'])->name('update');
         Route::get('/delete/{id}',[OrderStatusController::class,'destroy'])->name('destroy');
+        Route::get('/ajax',[OrderStatusController::class,'ajax'])->name('ajax');
+        Route::get('/order-status-assign',[OrderStatusController::class,'OrderStatusAssign'])->name('order-status-assign');
 
     });
 });

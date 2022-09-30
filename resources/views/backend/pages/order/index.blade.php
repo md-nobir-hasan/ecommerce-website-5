@@ -7,6 +7,16 @@
 @endpush
 
 @push('page_css')
+    <style>
+        .btn-box {
+            display: flex;
+            justify-content: center;
+        }
+
+        .dialogify-bottom-select {
+            margin-bottom: 33px;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -60,15 +70,25 @@
                                             <td>{{ $order->pamyment_methods }}</td>
                                             <td>{{ $order->created_at->diffForHumans() }}</td>
                                             <td>
-                                                @if ($order->order_status == 'new')
-                                                    <span class="badge badge-primary">{{ $order->order_status }}</span>
-                                                @elseif($order->order_status == 'process')
-                                                    <span class="badge badge-warning">{{ $order->order_status }}</span>
-                                                @elseif($order->order_status == 'delivered')
-                                                    <span class="badge badge-success">{{ $order->order_status }}</span>
-                                                @else
-                                                    <span class="badge badge-danger">{{ $order->order_status }}</span>
-                                                @endif
+                                                <a class="btn">
+                                                    @if ($order->order_status == 'new')
+                                                        <span class="badge badge-primary order_status"
+                                                            onclick="orderStatus({{ $order->id }},{{ $key }})"
+                                                            id="order_status{{ $key }}">{{ $order->order_status }}</span>
+                                                    @elseif($order->order_status == 'process')
+                                                        <span class="badge badge-warning order_status"
+                                                            onclick="orderStatus({{ $order->id }},{{ $key }})"
+                                                            id="order_status{{ $key }}">{{ $order->order_status }}</span>
+                                                    @elseif($order->order_status == 'delivered')
+                                                        <span class="badge badge-success order_status"
+                                                            onclick="orderStatus({{ $order->id }},{{ $key }})"
+                                                            id="order_status{{ $key }}">{{ $order->order_status }}</span>
+                                                    @else
+                                                        <span class="badge badge-danger order_status"
+                                                            onclick="orderStatus({{ $order->id }},{{ $key }})"
+                                                            id="order_status{{ $key }}">{{ $order->order_status }}</span>
+                                                    @endif
+                                                </a>
                                             </td>
                                             <td class="text-middle py-0 align-middle">
                                                 <div class="btn-group">
@@ -99,6 +119,7 @@
 
 @push('third_party_scripts')
     <script src="{{ asset('assets/backend/js/DataTable/datatables.min.js') }}"></script>
+    <script src="https://www.jqueryscript.net/demo/Dialog-Modal-Dialogify/dist/dialogify.min.js"></script>
 @endpush
 
 @push('page_scripts')
@@ -125,5 +146,85 @@
                 ]
             });
         });
+
+        // Dialogify
+        function orderStatus(order_id, key) {
+            var options = {
+                ajaxPrefix: ''
+            };
+            new Dialogify('{{ url('order-status/ajax') }}', options)
+                .title("Ordere Status")
+                .buttons([{
+                        text: "Cancle",
+                        type: Dialogify.BUTTON_DANGER,
+                        click: function(e) {
+                            this.close();
+                        }
+                    },
+                    {
+                        text: 'Status update',
+                        type: Dialogify.BUTTON_PRIMARY,
+                        click: function(e) {
+                            var name = $('#order_status_name').val();
+
+                            $.ajax({
+                                cache: false,
+                                url: "{{ route('order-status.order-status-assign') }}",
+                                method: "GET",
+                                data: {
+                                    name: name,
+                                    order_id: order_id
+                                },
+                                success: function(data) {
+                                    if (data != 0) {
+                                        alert('Order Status successfully updated')
+                                        // console.log($('#order_status').html());
+                                        $('#order_status' + key).html(data);
+
+                                    } else {
+                                        alert("Order Status can't update")
+
+                                    }
+                                }
+                            });
+
+                        }
+                        // }
+                    }
+                ]).showModal();
+            //     });
+            // });
+        }
     </script>
 @endpush
+{{-- var form_data = new FormData();
+form_data.append('name', $('#name').val());
+form_data.append('address', $('#address')
+.val());
+form_data.append('discount', discount_v);
+form_data.append('id', data[0].cake_id);
+$.ajax({
+method: "POST",
+url: '{{ url('order.store') }}',
+data: form_data,
+// dataType:'json',
+contentType: false,
+cache: false,
+processData: false,
+success: function(value) {
+// alert(value);
+// $.ajax({
+// cache: false,
+// url: "{{ url('order.store') }}",
+// method: "POST",
+// success: function(
+// data) {
+// $("#show_data")
+// .html(
+// data
+// );
+// }
+// });
+
+}
+}); --}}
