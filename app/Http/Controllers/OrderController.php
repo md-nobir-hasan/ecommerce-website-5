@@ -78,7 +78,6 @@ class OrderController extends Controller
         $insert->shipping_id = 1;
         $insert->pamyment_methods = $request->pamyment_methods;
         $insert->payment_number = $request->payment_number;
-
         // = $request->payment_number;
         $order_number = 'ORD-'.strtoupper(Str::random(10));
         $insert->order_number = $order_number;
@@ -86,15 +85,18 @@ class OrderController extends Controller
         $shipping_price = Shipping::find($request->shipping_id);
 
         // calculation
-        $subtotal =$request->product_price*$request->quantity;
+        $discount = $request->product_price*$request->discount/100;
+        $discount_price = $request->discount_price;
+        $subtotal =$discount_price*$request->quantity;
         $total = $subtotal + $shipping_price->price;
         $insert->total_amount = $subtotal;
-        $insert->sub_total = $subtotal;
+        $insert->sub_total = $total;
 
-        $insert->country = $request->payment_number;
-        $insert->last_name = $request->payment_number;
+        $insert->country = 'null';
+        $insert->last_name = 'null';
 
         // Status Status
+
         $order_statuses = OrderStatus::first();
         if($order_statuses !=null){
             $insert->order_status = $order_statuses->name;
@@ -112,11 +114,14 @@ class OrderController extends Controller
 
         $order_details['order_number'] = $order_number;
           $order_details['date'] = date('d-m-Y');
-          $order_details['total'] = $request->product_price;
+          $order_details['total'] = $total;
           $order_details['product_price'] = $request->product_price;
+          $order_details['discount'] = $request->discount;
+          $order_details['discount_taka'] = $discount;
+          $order_details['qty'] = $request->quantity;
           $order_details['payment_methdod'] = 'ক্যাশ অন ডেলিভারি';
           $order_details['product_name'] = $request->product_title;
-          $order_details['subtotal'] = $request->product_price;
+          $order_details['subtotal'] = $subtotal;
           $order_details['shipping'] = $shipping_price->price;
           $order_details['client_name'] = $request->first_name;
           $order_details['client_phone'] = $request->phone;
