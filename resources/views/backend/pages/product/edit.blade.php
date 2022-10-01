@@ -95,7 +95,7 @@
                                             <option value="">--Select Brand--</option>
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->id }}"
-                                                    @if ($brand->id == $product->brand_info->id) selected @endif>{{ $brand->title }}
+                                                    @if ($brand->id == 258) selected @endif>{{ $brand->title }}
                                                 </option>
                                             @endforeach
                                         </select>

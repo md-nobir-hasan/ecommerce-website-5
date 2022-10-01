@@ -78,8 +78,9 @@
                                 <h3>{{ $product->title }}</h3>
                                 @php
                                     $discount = ($product->discount * $product->price) / 100;
+                                    $discount_price = $product->price - $discount;
                                 @endphp
-                                <div class="price"> {{ round($product->price - $discount) }}৳
+                                <div class="price"> {{ round($discount_price) }}৳
                                     <span>{{ round($product->price) }}৳</span>
                                 </div>
                             </div>
@@ -103,6 +104,8 @@
                                             {{-- Hidden field  --}}
                                             <input type="hidden" name="product_title" value="{{ $product->title }}">
                                             <input type="hidden" name="product_price" value="{{ $product->price }}">
+                                            <input type="hidden" name="discount_price" value="{{ $discount_price }}">
+                                            <input type="hidden" name="discount" value="{{ $product->discount }}">
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
 
                                             {{-- Form part  --}}
@@ -127,8 +130,8 @@
                                                 <label for="phone" class="form-label">ফোন নাম্বার
                                                     <span style="color: red;">*</span>
                                                 </label>
-                                                <input type="tel" name="phone" class="form-control" id="phone"
-                                                    aria-describedby="inputGroupPrepend" required
+                                                <input type="tel" name="phone" class="form-control"
+                                                    id="phone" aria-describedby="inputGroupPrepend" required
                                                     placeholder="Enter your phone number">
                                             </div>
 
@@ -137,10 +140,10 @@
                                                 <input type="email" name="email" id="email"
                                                     class="form-control" placeholder="Enter your address">
                                             </div>
-                                            <div class="col-md-4 mt-4">
+                                            <div class="col-md-12    mt-4">
                                                 <label for="quantity" class="form-label">পরিমাণ</label>
-                                                <input type="number" name="quantity" value="1" id="quantity"
-                                                    class="form-control" required>
+                                                <input type="number" name="quantity" class="form-control"
+                                                    value="1" id="quantity" required>
                                             </div>
 
                                             <div class="col-md-12 mt-4">
@@ -150,7 +153,7 @@
                                                     <option value="" hidden>Select Shipping Method</option>
                                                     @foreach ($shipping as $n)
                                                         <option value="{{ $n->id }}">
-                                                            {{ $n->type . '(' . $n->price . ')' }}
+                                                            {{ $n->type . '(' . $n->price . '৳)' }}
                                                         </option>
                                                     @endforeach
                                                 </select>

@@ -16,11 +16,11 @@
 
     <div class="container-fluid">
         <div class="row order-receive-details m-1 pl-3">
-            <div class="col-md-6 border-bottom p-3">Order Number: <strong>{{ $order_number }}</strong></div>
+            <div class="col-md-6 border-bottom p-3 text-right">Order Number: <strong>{{ $order_number }}</strong></div>
             <div class="col-md-6 border-bottom p-3">Your Name: <strong>{{ $client_name }}</strong></div>
-            <div class="col-md-6 border-bottom p-3">Your Phone: <strong>{{ $client_phone }}</strong></div>
+            <div class="col-md-6 border-bottom p-3 text-right">Your Phone: <strong>{{ $client_phone }}</strong></div>
             <div class="col-md-6 border-bottom p-3">Your Address: <strong>{{ $client_address }}</strong></div>
-            <div class="col-md-6 border-bottom p-3">Date: <strong>{{ $date }} </strong></div>
+            <div class="col-md-6 border-bottom p-3 text-right">Date: <strong>{{ $date }} </strong></div>
             <div class="col-md-6 border-bottom p-3">Total: <strong>{{ $total }}</strong></div>
             <div class="col-md-6 border-bottom p-3">Payment Method: <strong>{{ $payment_methdod }}</strong></div>
         </div>
@@ -33,16 +33,38 @@
             </div>
 
             <div class="order-details-div border-bottom p-3">
-                <div class="order-details-text">{{ $product_name }}</div>
+                <div class="order-details-text">{{ $product_name }}: </div>
                 <div class="order-details-text">{{ $product_price }}৳</div>
             </div>
+
             <div class="order-details-div border-bottom p-3">
-                <div class="order-details-text">Shipping</div>
+                <div class="order-details-text">Discount: </div>
+                <div class="order-details-text">{{ $discount_taka . '৳(' . $discount . '%)' }}</div>
+            </div>
+
+            <div class="order-details-div border-bottom p-3">
+                <div class="order-details-text">After Discount: </div>
+                <div class="order-details-text">{{ $product_price - $discount_taka }}৳</div>
+            </div>
+
+            <div class="order-details-div border-bottom p-3">
+                <div class="order-details-text">Quantity: </div>
+                <div class="order-details-text">{{ $qty }}</div>
+            </div>
+
+            <div class="order-details-div border-bottom p-3">
+                <div class="order-details-text">Subtotal: </div>
+                <div class="order-details-text">{{ $subtotal }}৳</div>
+            </div>
+
+            <div class="order-details-div border-bottom p-3">
+                <div class="order-details-text">Shipping: </div>
                 <div class="order-details-text">{{ $shipping }}৳</div>
             </div>
+
             <div class="order-details-div border-bottom p-3">
-                <div class="order-details-text">Subtotal</div>
-                <div class="order-details-text">{{ $subtotal }}৳</div>
+                <div class="order-details-text">Total: </div>
+                <div class="order-details-text">{{ $total }}৳</div>
             </div>
 
             <div class="order-details-div border-bottom p-3">
@@ -50,7 +72,7 @@
                 <div class="order-details-text">{{ $payment_methdod }}</div>
             </div>
             <div class="order-details-div border-bottom p-3">
-                <div class="order-details-text">total</div>
+                <div class="order-details-text">You have to pay</div>
                 <div class="order-details-text">{{ $total }}৳</div>
             </div>
         </div>
