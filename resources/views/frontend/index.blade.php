@@ -93,21 +93,23 @@
                                     <form action="{{ route('order.store') }}" method="POST"
                                         class="row g-3 needs-validation">
                                         @csrf
+                                        {{-- Hidden field  --}}
+                                        <input type="hidden" name="product_title" value="{{ $product->title }}">
+                                        <input type="hidden" name="product_price" value="{{ $product->price }}">
+                                        <input type="hidden" name="discount_price" value="{{ $discount_price }}">
+                                        <input type="hidden" name="discount" value="{{ $product->discount }}">
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel{{ $loop->index }}">Order
+                                            <h2 class="modal-title text-success"
+                                                id="exampleModalLabel{{ $loop->index }}">Order
                                                 Form
-                                            </h5>
+                                            </h2>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body ml-5">
-                                            {{-- Hidden field  --}}
-                                            <input type="hidden" name="product_title" value="{{ $product->title }}">
-                                            <input type="hidden" name="product_price" value="{{ $product->price }}">
-                                            <input type="hidden" name="discount_price" value="{{ $discount_price }}">
-                                            <input type="hidden" name="discount" value="{{ $product->discount }}">
-                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <div class="modal-body">
 
+                                            <h2 class="text-center text-primary">{{ $product->title }}</h2>
                                             {{-- Form part  --}}
                                             <div class="col-md-12">
                                                 <label for="name" class="form-label">নাম <span
